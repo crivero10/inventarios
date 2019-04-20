@@ -43,8 +43,8 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
     // function to populate the jtable with users data
     public void populateJtable(){
         
-        CLASS.C_Users user = new CLASS.C_Users();
-        ArrayList<CLASS.C_Users> userList = user.UsersList();
+        CLASS.Model.C_User user = new CLASS.Model.C_User();
+        ArrayList<CLASS.Model.C_User> userList = user.UsersList();
         
         String[] colNames = {"Id","username","password","fullname","Tel","Email"};
         Object[][] rows = new Object[userList.size()][6];
@@ -318,8 +318,8 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
             String tel = jTextField_TEL.getText();
             String email = jTextField_EMAIL.getText();
 
-            CLASS.C_Users user = new CLASS.C_Users(null,uname,pass,null,fname,tel,email);
-            CLASS.C_Users.insertUser(user);
+            CLASS.Model.C_User user = new CLASS.Model.C_User(null,uname,pass,null,fname,tel,email);
+            CLASS.Model.C_User.insertUser(user);
             populateJtable();
         }
         
@@ -341,8 +341,8 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
                 String email = jTextField_EMAIL.getText();
 
                 // username`, `password`, `user_type`, `fullname`, `tel`, `email
-                CLASS.C_Users user = new CLASS.C_Users(id,uname,pass,null,fname,tel,email);
-                CLASS.C_Users.updateUser(user);
+                CLASS.Model.C_User user = new CLASS.Model.C_User(id,uname,pass,null,fname,tel,email);
+                CLASS.Model.C_User.updateUser(user);
                 populateJtable();
             }
             
@@ -358,7 +358,7 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
 
         try{
             Integer id = Integer.valueOf(jTextField_ID.getText());
-            CLASS.C_Users.deleteUser(id);
+            CLASS.Model.C_User.deleteUser(id);
             populateJtable(); 
             jButton_CLEAR_ActionPerformed(null);
         }catch(Exception ex){

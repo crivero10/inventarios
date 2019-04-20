@@ -46,6 +46,7 @@ public class Home_Form extends javax.swing.JFrame {
         jMenu_CUSTOMER_ = new javax.swing.JMenu();
         jMenu_ORDER_ = new javax.swing.JMenu();
         jMenu5_USER_ = new javax.swing.JMenu();
+        jMenu_FACT = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,7 +101,7 @@ public class Home_Form extends javax.swing.JFrame {
         jMenuBar1.add(jMenu_ORDER_);
 
         jMenu5_USER_.setBackground(new java.awt.Color(249, 105, 14));
-        jMenu5_USER_.setText("  ADMINISTRACION DE USUARIOS  ");
+        jMenu5_USER_.setText("USUARIOS |");
         jMenu5_USER_.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenu5_USER_.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jMenu5_USER_.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -110,13 +111,24 @@ public class Home_Form extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu5_USER_);
 
+        jMenu_FACT.setBackground(new java.awt.Color(249, 105, 14));
+        jMenu_FACT.setText("PREFACTURAS | ");
+        jMenu_FACT.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jMenu_FACT.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jMenu_FACT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_FACTMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu_FACT);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_BackgroundImage, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(jLabel_BackgroundImage, javax.swing.GroupLayout.DEFAULT_SIZE, 1396, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,6 +199,10 @@ public class Home_Form extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu5_USER_MouseClicked
 
+    private void jMenu_FACTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_FACTMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu_FACTMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -228,6 +244,7 @@ public class Home_Form extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenu_CATEGORY_;
     private javax.swing.JMenu jMenu_CUSTOMER_;
+    public javax.swing.JMenu jMenu_FACT;
     private javax.swing.JMenu jMenu_ORDER_;
     private javax.swing.JMenu jMenu_PRODUCT_;
     // End of variables declaration//GEN-END:variables

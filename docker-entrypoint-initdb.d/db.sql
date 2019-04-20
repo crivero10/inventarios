@@ -239,22 +239,6 @@ INSERT INTO `product` (`id`, `name`, `quantity`, `price`, `picture`, `category_i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `session`
---
-
-CREATE TABLE `session` (
-  `id_session` int(11) NOT NULL AUTO_INCREMENT,
-  `id_user` int(11) NOT NULL,
-  `login_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `logout_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_session`),
-  KEY `id_user_idx` (`id_user`),
-  CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -273,7 +257,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `user_type`, `fullname`, `tel`, `email`) VALUES
-(1, 'admin', 'adminpass', 'admin', 'NONO', '123456789', 'nono@gmail.com'),
+(1, 'admin', 'adminpass', 'Admin', 'NONO', '123456789', 'nono@gmail.com'),
 (2, 'user1', 'userpass', 'user', 'user1 name', '66777772722', 'ddd@mail.com'),
 (5, 'testuser', 'testpass', 'user', 'test user', '234567890', 'testuser@gmail.com');
 

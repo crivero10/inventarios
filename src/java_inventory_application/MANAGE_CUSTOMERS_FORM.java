@@ -23,8 +23,11 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
     /**
      * Creates new form MANAGE_CUSTOMERS_FORM
      */
+    String selectedRFC = "00000000000";
     public MANAGE_CUSTOMERS_FORM() {
         initComponents();
+        
+        
         
         populateJtable();
         
@@ -47,12 +50,12 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
         CLASS.Customer customer = new CLASS.Customer();
         ArrayList<CLASS.Customer> CustomerList = customer.customersList();
         
-        String[] colNames = {"Id","First Name","Last Name","Tel","Email"};
+        String[] colNames = {"RFC","Nombre","Apellido","Telefono","Email"};
         Object[][] rows = new Object[CustomerList.size()][5];
         DefaultTableModel model = (DefaultTableModel) jTable_CUSTOMERS_.getModel();
         
         for(int i = 0; i < CustomerList.size(); i++){
-            rows[i][0] = CustomerList.get(i).getId();
+            rows[i][0] = CustomerList.get(i).getRfc();
             rows[i][1] = CustomerList.get(i).getFirst_name();
             rows[i][2] = CustomerList.get(i).getLast_name();
             rows[i][3] = CustomerList.get(i).getTel();
@@ -80,8 +83,6 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_CUSTOMERS_ = new javax.swing.JTable();
-        jTextField_ID = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField_FNAME = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -103,6 +104,8 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
         jButton_INSERT_ = new javax.swing.JButton();
         jButton_UPDATE_ = new javax.swing.JButton();
         jButton_DELETE_ = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField_RFC = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,12 +126,6 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable_CUSTOMERS_);
 
-        jTextField_ID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ID:");
-
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre:");
@@ -137,7 +134,7 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("RFC");
+        jLabel3.setText("Apellido:");
 
         jTextField_LNAME.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -149,7 +146,7 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Email:");
+        jLabel5.setText("RFC: ");
 
         jTextField_EMAIL.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -285,6 +282,17 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Email:");
+
+        jTextField_RFC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField_RFC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_RFCActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -294,28 +302,32 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(10, 10, 10))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel5)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField_FNAME, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                                    .addComponent(jTextField_ID)
-                                    .addComponent(jTextField_LNAME)
-                                    .addComponent(jTextField_TEL)
-                                    .addComponent(jTextField_EMAIL))))
-                        .addGap(5, 5, 5))
-                    .addComponent(jButton_CLEAR_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTextField_FNAME, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                                            .addComponent(jTextField_LNAME)
+                                            .addComponent(jTextField_TEL)
+                                            .addComponent(jTextField_EMAIL)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(10, 10, 10)))
+                                .addGap(5, 5, 5))
+                            .addComponent(jButton_CLEAR_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField_RFC)
+                        .addGap(23, 23, 23)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,11 +349,7 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(59, 59, 59)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jTextField_FNAME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -355,13 +363,17 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
                             .addComponent(jTextField_TEL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField_EMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
+                            .addComponent(jTextField_EMAIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_RFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(36, 36, 36)
                         .addComponent(jButton_CLEAR_, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_INSERT_, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -389,98 +401,101 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // get selected customer from jtable to textfields
-    private void jTable_CUSTOMERS_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_CUSTOMERS_MouseClicked
-        
-        try{
-        
-                Integer rowIndex = jTable_CUSTOMERS_.getSelectedRow();
-                jTextField_ID.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString());
-                jTextField_FNAME.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 1).toString());
-                jTextField_LNAME.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 2).toString());
-                jTextField_TEL.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 3).toString());
-                jTextField_EMAIL.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 4).toString());
-
-                CLASS.THE_ORDER order = new CLASS.THE_ORDER();
-                jLabel_ORDERS_COUNT.setText(order.getCustomerOrdersCount(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
-                jLabel_TOTAL_AMOUNT.setText(order.getCustomerOrdersTotalAmount(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
-                jLabel_LAST_ORDER_DATE.setText(order.getCustomerLastOrderDate(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
-            
-        }catch(Exception ex){
-          
-        }
-        
-    }//GEN-LAST:event_jTable_CUSTOMERS_MouseClicked
-
-    // button insert
-    private void jButton_INSERT_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_INSERT_ActionPerformed
-       
-            if(verifFields())
-            {
-                String fname = jTextField_FNAME.getText();
-                String lname = jTextField_LNAME.getText();
-                String tel = jTextField_TEL.getText();
-                String email = jTextField_EMAIL.getText();
-
-                CLASS.Customer customer = new CLASS.Customer(null, fname, lname, tel, email);
-                CLASS.Customer.insertCustomer(customer);
-                populateJtable();
-            }
-    }//GEN-LAST:event_jButton_INSERT_ActionPerformed
-
-    // button update
-    private void jButton_UPDATE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_UPDATE_ActionPerformed
-      
-        try{
-            if(verifFields())
-            {
-                String fname = jTextField_FNAME.getText();
-                String lname = jTextField_LNAME.getText();
-                String tel = jTextField_TEL.getText();
-                String email = jTextField_EMAIL.getText();
-                Integer id = Integer.valueOf(jTextField_ID.getText());
-
-                CLASS.Customer customer = new CLASS.Customer(id, fname, lname, tel, email);
-                CLASS.Customer.updateCustomer(customer);   
-                populateJtable();
-            }
-        }catch(Exception ex){
-                JOptionPane.showMessageDialog(null, "Select a Customer Before Editing", "No Customer Selected", 1);
-                }
-        
-    }//GEN-LAST:event_jButton_UPDATE_ActionPerformed
+    private void jTextField_RFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_RFCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_RFCActionPerformed
 
     // button delete
     private void jButton_DELETE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DELETE_ActionPerformed
-        
+
         try{
-            Integer id = Integer.valueOf(jTextField_ID.getText());
-            CLASS.Customer.deleteCustomer(id);
+            CLASS.Customer.deleteCustomer(this.selectedRFC);
             populateJtable();
         }catch(Exception ex){
-                JOptionPane.showMessageDialog(null, "Select a Customer Before Removing", "No Customer Selected", 1);
-                }
-        
+            JOptionPane.showMessageDialog(null, "Select a Customer Before Removing", "No Customer Selected", 1);
+        }
     }//GEN-LAST:event_jButton_DELETE_ActionPerformed
 
-    
+    // button update
+    private void jButton_UPDATE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_UPDATE_ActionPerformed
+
+        try{
+            if(verifFields())
+            {
+                String fname = jTextField_FNAME.getText();
+                String lname = jTextField_LNAME.getText();
+                String tel = jTextField_TEL.getText();
+                String email = jTextField_EMAIL.getText();
+                String rfc = jTextField_RFC.getText();
+                
+
+                CLASS.Customer customer = new CLASS.Customer(100, fname, lname, tel, email, rfc);
+                CLASS.Customer.updateCustomer(this.selectedRFC, customer);
+                populateJtable();
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Select a Customer Before Editing", "No Customer Selected", 1);
+        }
+    }//GEN-LAST:event_jButton_UPDATE_ActionPerformed
+
+    // button insert
+    private void jButton_INSERT_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_INSERT_ActionPerformed
+
+        if(verifFields())
+        {
+            String fname = jTextField_FNAME.getText();
+            String lname = jTextField_LNAME.getText();
+            String tel = jTextField_TEL.getText();
+            String email = jTextField_EMAIL.getText();
+            String rfc = jTextField_RFC.getText();
+
+            CLASS.Customer customer = new CLASS.Customer(null, fname, lname, tel, email, rfc);
+            CLASS.Customer.insertCustomer(customer);
+            populateJtable();
+        }
+    }//GEN-LAST:event_jButton_INSERT_ActionPerformed
+
     // button to clear textfields / reset labels to default value ( ### )
     private void jButton_CLEAR_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CLEAR_ActionPerformed
-        
+
         // textfields
-        jTextField_ID.setText("");
         jTextField_FNAME.setText("");
         jTextField_LNAME.setText("");
         jTextField_EMAIL.setText("");
         jTextField_TEL.setText("");
-        
+
         // labels
         jLabel_ORDERS_COUNT.setText("###");
         jLabel_TOTAL_AMOUNT.setText("###");
         jLabel_LAST_ORDER_DATE.setText("###");
-
     }//GEN-LAST:event_jButton_CLEAR_ActionPerformed
 
+    // get selected customer from jtable to textfields
+    private void jTable_CUSTOMERS_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_CUSTOMERS_MouseClicked
+
+        try{
+
+            Integer rowIndex = jTable_CUSTOMERS_.getSelectedRow();
+            this.selectedRFC = jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString();
+            jTextField_RFC.setText(this.selectedRFC);
+            jTextField_FNAME.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 1).toString());
+            jTextField_LNAME.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 2).toString());
+            jTextField_TEL.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 3).toString());
+            jTextField_EMAIL.setText(jTable_CUSTOMERS_.getValueAt(rowIndex, 4).toString());
+            
+            
+
+            CLASS.THE_ORDER order = new CLASS.THE_ORDER();
+            jLabel_ORDERS_COUNT.setText(order.getCustomerOrdersCount(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
+            jLabel_TOTAL_AMOUNT.setText(order.getCustomerOrdersTotalAmount(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
+            jLabel_LAST_ORDER_DATE.setText(order.getCustomerLastOrderDate(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
+
+        }catch(Exception ex){
+
+        }
+    }//GEN-LAST:event_jTable_CUSTOMERS_MouseClicked
+
+    
     
     
     // function to check empty fields
@@ -538,7 +553,6 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
     private javax.swing.JButton jButton_DELETE_;
     private javax.swing.JButton jButton_INSERT_;
     private javax.swing.JButton jButton_UPDATE_;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -546,6 +560,7 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_LAST_ORDER_DATE;
     private javax.swing.JLabel jLabel_ORDERS_COUNT;
     private javax.swing.JLabel jLabel_TOTAL_AMOUNT;
@@ -557,8 +572,8 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
     private javax.swing.JTable jTable_CUSTOMERS_;
     private javax.swing.JTextField jTextField_EMAIL;
     private javax.swing.JTextField jTextField_FNAME;
-    private javax.swing.JTextField jTextField_ID;
     private javax.swing.JTextField jTextField_LNAME;
+    private javax.swing.JTextField jTextField_RFC;
     private javax.swing.JTextField jTextField_TEL;
     // End of variables declaration//GEN-END:variables
 }

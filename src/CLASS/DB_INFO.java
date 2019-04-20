@@ -13,7 +13,7 @@ public class DB_INFO {
     private static String username = "root";
     private static String password = "root";
     
-       static Connection con=null;
+    static Connection con=null;
     public static Connection getConnection()
     {
         if (con != null) return con;

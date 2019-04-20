@@ -23,18 +23,20 @@ public class Customer {
     private String last_name;
     private String tel;
     private String email;
+    private String rfc;
 
     
     public Customer(){}
     
     
-    public Customer(Integer ID, String FNAME, String LNAME, String TEL, String EMAIL)
+    public Customer(Integer ID, String FNAME, String LNAME, String TEL, String EMAIL, String RFC)
     {
         this.id = ID;
         this.first_name = FNAME;
         this.last_name = LNAME;
         this.tel = TEL;
         this.email = EMAIL;
+        this.rfc = RFC;
     }
     
     
@@ -77,6 +79,14 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
     
     // get the customers list
     public ArrayList<Customer> customersList(){
@@ -87,7 +97,7 @@ public class Customer {
         ResultSet rs;
         PreparedStatement ps;
 
-               String query = "SELECT `id`, `first_name`, `last_name`, `tel`, `email` FROM `customer`";
+               String query = "SELECT `id`, `first_name`, `last_name`, `tel`, `email`, `rfc` FROM `customer`";
         
         try {
             ps = connection.prepareStatement(query);
@@ -100,7 +110,8 @@ public class Customer {
                                  rs.getString("first_name"),
                                  rs.getString("last_name"),
                                  rs.getString("tel"),
-                                 rs.getString("email")
+                                 rs.getString("email"),
+                                 rs.getString("rfc")
                                  );
                 
                 customer_list.add(customer);
@@ -122,12 +133,13 @@ public class Customer {
         PreparedStatement ps;
         
         try {
-            ps = con.prepareStatement("INSERT INTO `customer`(`first_name`, `last_name`, `tel`, `email`) VALUES (?,?,?,?)");
+            ps = con.prepareStatement("INSERT INTO `customer`(`first_name`, `last_name`, `tel`, `email`, `rfc`) VALUES (?,?,?,?,?)");
 
             ps.setString(1, customer.getFirst_name());
             ps.setString(2, customer.getLast_name());
             ps.setString(3, customer.getTel());
             ps.setString(4, customer.getEmail());
+            ps.setString(5, customer.getRfc());
             
 
             if(ps.executeUpdate() != 0){
@@ -146,19 +158,20 @@ public class Customer {
     
     
      // update customer data
-    public static void updateCustomer(Customer customer)
+    public static void updateCustomer(String rfc_current, Customer customer)
     {
         Connection con = DB_INFO.getConnection();
         PreparedStatement ps;
         
         try {
-            ps = con.prepareStatement("UPDATE `customer` SET `first_name`=?,`last_name`=?,`tel`=?,`email`=? WHERE `id`=?");
+            ps = con.prepareStatement("UPDATE `customer` SET `first_name`=?,`last_name`=?,`tel`=?,`email`=?,`rfc`=? WHERE `rfc`=?");
 
             ps.setString(1, customer.getFirst_name());
             ps.setString(2, customer.getLast_name());
             ps.setString(3, customer.getTel());
             ps.setString(4, customer.getEmail());
-            ps.setInt(5, customer.getId());
+            ps.setString(5, customer.getRfc());
+            ps.setString(6, rfc_current);
 
             if(ps.executeUpdate() != 0){
                 JOptionPane.showMessageDialog(null, "Customer Updated");
@@ -176,23 +189,23 @@ public class Customer {
     }
     
     // delete customer by id
-    public static void deleteCustomer(Integer customerId)
+    public static void deleteCustomer(String customerRFC)
     {
         
         Connection con = DB_INFO.getConnection();
         PreparedStatement ps;
         
         try {
-            ps = con.prepareStatement("DELETE FROM `customer` WHERE `id` = ?");
+            ps = con.prepareStatement("DELETE FROM `customer` WHERE `rfc` = ?");
 
-            ps.setInt(1, customerId);
+            ps.setString(1, customerRFC);
 
             // show a confirmation message before deleting the Customer
             int YesOrNo = JOptionPane.showConfirmDialog(null,"Do You Really Want To Delete This Customer","Delete Customer", JOptionPane.YES_NO_OPTION);
             if(YesOrNo == 0){
                 
                 if(ps.executeUpdate() != 0){
-                JOptionPane.showMessageDialog(null, "Customer Deleted");
+                    JOptionPane.showMessageDialog(null, "Customer Deleted");
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Something Wrong");

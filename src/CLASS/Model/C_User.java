@@ -1,5 +1,6 @@
-package CLASS;
+package CLASS.Model;
 
+import CLASS.DB_INFO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Jerry
  */
-public class C_Users {
+public class C_User {
 
 
     Connection connection;
@@ -27,10 +28,10 @@ public class C_Users {
     private String email;
 
     
-   public C_Users(){}
+   public C_User(){}
     
     
-    public C_Users(Integer ID, String UNAME, String PASW,String UTYP, String FNAME, String TEL, String EMAIL)
+    public C_User(Integer ID, String UNAME, String PASW,String UTYP, String FNAME, String TEL, String EMAIL)
     {
         this.id = ID;
         this.username = UNAME;
@@ -41,7 +42,41 @@ public class C_Users {
         this.email = EMAIL;
     }
     
-
+    public boolean isAdmin()
+    {
+        return this.user_type.equals("admin");
+    }
+    
+    public static C_User checkUser(String UNAME, String PASW){
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            ps = CLASS.DB_INFO.getConnection().prepareStatement("SELECT `id`, `username`, `password` , `user_type`, `fullname`, `tel`, `email` FROM `users` WHERE `username` = ? AND `password` = ?");
+            ps.setString(1, UNAME);
+            ps.setString(2, PASW);
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                
+                Integer id = rs.getInt("id");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String user_type = rs.getString("user_type");
+                String fullname = rs.getString("fullname");
+                String tel = rs.getString("tel");
+                String email = rs.getString("email");
+                
+                C_User loggedInUser = new C_User(id, username, password, user_type, fullname, tel, email);
+                
+                return loggedInUser;
+            } 
+        } catch (SQLException ex) {
+            Logger.getLogger(C_User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
 
     public Integer getId() {
         return id;
@@ -101,9 +136,9 @@ public class C_Users {
        
     
     // get users list
-    public ArrayList<C_Users> UsersList(){
+    public ArrayList<C_User> UsersList(){
         
-        ArrayList<C_Users> user_list = new ArrayList<>();
+        ArrayList<C_User> user_list = new ArrayList<>();
         connection = DB_INFO.getConnection();
 
         ResultSet rs;
@@ -115,9 +150,9 @@ public class C_Users {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
            
-            C_Users user;
+            C_User user;
             while(rs.next()){
-                user = new C_Users(rs.getInt("id"), 
+                user = new C_User(rs.getInt("id"), 
                                  rs.getString("username"),
                                  rs.getString("password"),
                                  rs.getString("user_type"),
@@ -129,7 +164,7 @@ public class C_Users {
             }
         
         } catch (SQLException ex) {
-            Logger.getLogger(C_Users.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(C_User.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user_list;
         
@@ -139,7 +174,7 @@ public class C_Users {
     
     
     // insert a new user
-     public static void insertUser(C_Users user)
+     public static void insertUser(C_User user)
     {
         Connection con = DB_INFO.getConnection();
         PreparedStatement ps;
@@ -165,13 +200,13 @@ public class C_Users {
                 }
             
         } catch (SQLException ex) {
-            Logger.getLogger(C_Users.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(C_User.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     
      // update user
-    public static void updateUser(C_Users user)
+    public static void updateUser(C_User user)
     {
         Connection con = DB_INFO.getConnection();
         PreparedStatement ps;
@@ -195,7 +230,7 @@ public class C_Users {
                 }
             
         } catch (SQLException ex) {
-            Logger.getLogger(C_Users.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(C_User.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -228,7 +263,7 @@ public class C_Users {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(C_Users.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(C_User.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         

@@ -67,7 +67,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
         CLASS.Customer customer = new CLASS.Customer();
         ArrayList<CLASS.Customer> CustomerList = customer.customersList();
         
-        String[] colNames = {"Id","First Name","Last Name","Tel","Email"};
+        String[] colNames = {"RFC","Nombre","Apellido","Telefono","Email"};
         Object[][] rows = new Object[CustomerList.size()][5];
         DefaultTableModel model = (DefaultTableModel) jTable_CUSTOMERS_.getModel();
         
@@ -168,6 +168,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
         jLabel_TOTAL = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,7 +209,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Fecha facturacio:");
+        jLabel3.setText("Fecha facturacion:");
         jLabel3.setToolTipText("");
 
         jTable_PRODUCTS_.setModel(new javax.swing.table.DefaultTableModel(
@@ -295,7 +296,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_TOTAL, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+            .addComponent(jLabel_TOTAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTextField1.setToolTipText("Nombre de producto");
@@ -304,6 +305,13 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Pagar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -324,29 +332,36 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField_ORDER_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField_CUSTOMER_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton_INSERT_ORDER_, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton_SHOW_ORDERS_, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEè, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton_CLEAR_ORDER_TABLE_, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField_ORDER_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_CUSTOMER_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton_INSERT_ORDER_, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_SHOW_ORDERS_, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEè, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_CLEAR_ORDER_TABLE_, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -376,7 +391,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(249, 249, 249)
+                        .addGap(151, 151, 151)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_INSERT_ORDER_)
                             .addComponent(jButton_SHOW_ORDERS_)
@@ -385,16 +400,19 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                         .addGap(3, 3, 3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_))))
+                        .addGap(171, 171, 171)
+                        .addComponent(jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jLabel4.getAccessibleContext().setAccessibleName("CUSTOMER:");
@@ -404,56 +422,59 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // display products by category
-    private void jComboBox_CATEGORIES_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_CATEGORIES_ActionPerformed
-        
-        CLASS.Category category = new CLASS.Category();        
-        HashMap<String, Integer> map = category.populateCombo();
-        populateProductJtable(Integer.valueOf(map.get(jComboBox_CATEGORIES_.getSelectedItem().toString()).toString()));
-        
-    }//GEN-LAST:event_jComboBox_CATEGORIES_ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-    
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // add product from table products to order table
     private void jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_ActionPerformed
-        
+
         Integer quantity ;
         int rowindex;
-        
+
         try{
-        
+
             // get the quantity from InputDialog
             quantity = Integer.valueOf(JOptionPane.showInputDialog("Enter The Quantity You Want","1"));
-            
+
             rowindex = jTable_PRODUCTS_.getSelectedRow();
-            
+
             boolean isExist = false;// a variable to check if the product already exist in the table order
             int index = 0;
-            
+
             Object rowData[] = new Object[5];
 
-                    rowData[0] = jTable_PRODUCTS_.getValueAt(rowindex, 0);
-                    rowData[1] = jTable_PRODUCTS_.getValueAt(rowindex, 1);
-                    rowData[2] = jTable_PRODUCTS_.getValueAt(rowindex, 2);
-                    rowData[3] = quantity;
+            rowData[0] = jTable_PRODUCTS_.getValueAt(rowindex, 0);
+            rowData[1] = jTable_PRODUCTS_.getValueAt(rowindex, 1);
+            rowData[2] = jTable_PRODUCTS_.getValueAt(rowindex, 2);
+            rowData[3] = quantity;
 
-                    Double price = Double.valueOf(jTable_PRODUCTS_.getValueAt(rowindex, 2).toString());
+            Double price = Double.valueOf(jTable_PRODUCTS_.getValueAt(rowindex, 2).toString());
 
-                    rowData[4] = quantity * price;
+            rowData[4] = quantity * price;
 
-                    DefaultTableModel model = (DefaultTableModel)jTable_PRODUCTS_IN_ORDER_.getModel();
+            DefaultTableModel model = (DefaultTableModel)jTable_PRODUCTS_IN_ORDER_.getModel();
 
-            // if the quantity you entred is heigher than the one in the jtable products         
+            // if the quantity you entred is heigher than the one in the jtable products
             if(quantity > Integer.valueOf(jTable_PRODUCTS_.getValueAt(rowindex, 3).toString()))
             {
                 JOptionPane.showMessageDialog(null, "Unavailable Quantity","Invalid Value",2);
@@ -465,109 +486,109 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
             }
             else
             {
-               if(jTable_PRODUCTS_IN_ORDER_.getModel().getRowCount() == 0)
-               {
+                if(jTable_PRODUCTS_IN_ORDER_.getModel().getRowCount() == 0)
+                {
 
-                    model.addRow(rowData);   
+                    model.addRow(rowData);
                     getTotal();
-               }
-               else
-               {
-                   // check if the product you want to add already exisit in the table ( using the product id )
-                   for(int i = 0; i < jTable_PRODUCTS_IN_ORDER_.getModel().getRowCount(); i++)
-                   {
-                       if(rowData[0] == jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 0))
-                       {
-                           isExist = true;
-                           index = i;
-                       }
-                   }
-                       if(isExist)
-                       {
-                           // if the product already exisit
-                           // claculate the new quantity
-                           // new quantity = quantity(the current quantity you entred) + ( the quantity in the jtable order )
-                           Integer newQuantity = quantity + Integer.valueOf(jTable_PRODUCTS_IN_ORDER_.getValueAt(index, 3).toString());
-                           
-                           // if the new quantity is heigher than the one in the jtable products 
-                           if(newQuantity > Integer.valueOf(jTable_PRODUCTS_.getValueAt(rowindex, 3).toString()))
-                           {
-                               JOptionPane.showMessageDialog(null, "Unavailable Quantity","Invalid Value",2);
-                           }else{
-                               jTable_PRODUCTS_IN_ORDER_.setValueAt(newQuantity, index, 3);
-                               jTable_PRODUCTS_IN_ORDER_.setValueAt(newQuantity * price, index, 4);
-                               getTotal();
-                           }
-                       }
-                       else{
-                           model.addRow(rowData);
-                           getTotal();
-                       }
+                }
+                else
+                {
+                    // check if the product you want to add already exisit in the table ( using the product id )
+                    for(int i = 0; i < jTable_PRODUCTS_IN_ORDER_.getModel().getRowCount(); i++)
+                    {
+                        if(rowData[0] == jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 0))
+                        {
+                            isExist = true;
+                            index = i;
+                        }
+                    }
+                    if(isExist)
+                    {
+                        // if the product already exisit
+                        // claculate the new quantity
+                        // new quantity = quantity(the current quantity you entred) + ( the quantity in the jtable order )
+                        Integer newQuantity = quantity + Integer.valueOf(jTable_PRODUCTS_IN_ORDER_.getValueAt(index, 3).toString());
 
-               }
+                        // if the new quantity is heigher than the one in the jtable products
+                        if(newQuantity > Integer.valueOf(jTable_PRODUCTS_.getValueAt(rowindex, 3).toString()))
+                        {
+                            JOptionPane.showMessageDialog(null, "Unavailable Quantity","Invalid Value",2);
+                        }else{
+                            jTable_PRODUCTS_IN_ORDER_.setValueAt(newQuantity, index, 3);
+                            jTable_PRODUCTS_IN_ORDER_.setValueAt(newQuantity * price, index, 4);
+                            getTotal();
+                        }
+                    }
+                    else{
+                        model.addRow(rowData);
+                        getTotal();
+                    }
 
-            }   
-            
+                }
+
+            }
+
         }catch(HeadlessException | NumberFormatException ex)
         {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 1);
         }
-        
     }//GEN-LAST:event_jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_ActionPerformed
-
-    // get customer id on jtable mouse clicked
-    private void jTable_CUSTOMERS_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_CUSTOMERS_MouseClicked
-       
-        Integer selectedRowIndex = jTable_CUSTOMERS_.getSelectedRow();
-        jTextField_CUSTOMER_ID.setText(jTable_CUSTOMERS_.getValueAt(selectedRowIndex, 0).toString());
-        
-    }//GEN-LAST:event_jTable_CUSTOMERS_MouseClicked
-
-    // remove selected product from jtable order
-    private void jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEèActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEèActionPerformed
-       
-        try{
-             Integer selectedRowIndex = jTable_PRODUCTS_IN_ORDER_.getSelectedRow();
-             DefaultTableModel model = (DefaultTableModel)jTable_PRODUCTS_IN_ORDER_.getModel();
-             model.removeRow(selectedRowIndex);
-             getTotal(); 
-        }catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(null, "Select A Product From The Order Table", "No Product Selected", 1);
-        }
-        
-    }//GEN-LAST:event_jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEèActionPerformed
 
     // remove all products from the order jtable
     private void jButton_CLEAR_ORDER_TABLE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CLEAR_ORDER_TABLE_ActionPerformed
-       
+
         DefaultTableModel model = (DefaultTableModel) jTable_PRODUCTS_IN_ORDER_.getModel();
         model.setRowCount(0);
         getTotal();
     }//GEN-LAST:event_jButton_CLEAR_ORDER_TABLE_ActionPerformed
 
+    // remove selected product from jtable order
+    private void jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEèActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEèActionPerformed
+
+        try{
+            Integer selectedRowIndex = jTable_PRODUCTS_IN_ORDER_.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel)jTable_PRODUCTS_IN_ORDER_.getModel();
+            model.removeRow(selectedRowIndex);
+            getTotal();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, "Select A Product From The Order Table", "No Product Selected", 1);
+        }
+    }//GEN-LAST:event_jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEèActionPerformed
+
+    // show all orders in a new jframe
+    private void jButton_SHOW_ORDERS_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SHOW_ORDERS_ActionPerformed
+
+        All_Orders_Form allOrdersForm = new All_Orders_Form();
+        allOrdersForm.pack();
+        allOrdersForm.setVisible(true);
+        allOrdersForm.setLocationRelativeTo(null);
+        allOrdersForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton_SHOW_ORDERS_ActionPerformed
+
     // insert order
     private void jButton_INSERT_ORDER_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_INSERT_ORDER_ActionPerformed
-       
-     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-     String orderDate = "";
-     
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String orderDate = "";
+
         if(jDateChooser1.getDate() != null){
-          orderDate = dateFormat.format(jDateChooser1.getDate());
-          
-       } else{
+            orderDate = dateFormat.format(jDateChooser1.getDate());
+
+        } else{
             Date date = new Date();
             orderDate = dateFormat.format(date);
-       }       
-       
+        }
+
         if(jTextField_CUSTOMER_ID.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "Select A Customer To Add The Order", "No Customer Selected", 1);
         }
-        
-       else if(jTable_PRODUCTS_IN_ORDER_.getRowCount() > 0)
+
+        else if(jTable_PRODUCTS_IN_ORDER_.getRowCount() > 0)
         {
-            
+
             Integer productId;
             Integer orderId = Integer.valueOf(jTextField_ORDER_ID.getText());
             Integer qty;
@@ -576,58 +597,57 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
 
             // insert the order
             CLASS.THE_ORDER.insertOrder(orderId, orderDate, Integer.valueOf(jTextField_CUSTOMER_ID.getText()));
-            
+
             // get the product data
-                for(int i = 0; i < jTable_PRODUCTS_IN_ORDER_.getRowCount(); i++)
-                {
-                    productId = Integer.valueOf(jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 0).toString());
-                    price = jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 2).toString();
-                    qty = Integer.valueOf(jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 3).toString());
-                    total = jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 4).toString();
-                  
-                    // insert the order details
-                    CLASS.THE_ORDER.insertOrderDetails(productId, orderId, qty, price, total);
-                    
-                    // display the new order id in textfield
-                        CLASS.THE_ORDER ord = new CLASS.THE_ORDER();
-                        jTextField_ORDER_ID.setText(String.valueOf(ord.getMaxOrderId() + 1));
-                }
-                
-                jComboBox_CATEGORIES_ActionPerformed(null);
-                
+            for(int i = 0; i < jTable_PRODUCTS_IN_ORDER_.getRowCount(); i++)
+            {
+                productId = Integer.valueOf(jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 0).toString());
+                price = jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 2).toString();
+                qty = Integer.valueOf(jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 3).toString());
+                total = jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 4).toString();
+
+                // insert the order details
+                CLASS.THE_ORDER.insertOrderDetails(productId, orderId, qty, price, total);
+
+                // display the new order id in textfield
+                CLASS.THE_ORDER ord = new CLASS.THE_ORDER();
+                jTextField_ORDER_ID.setText(String.valueOf(ord.getMaxOrderId() + 1));
+            }
+
+            jComboBox_CATEGORIES_ActionPerformed(null);
+
         }
         else{
-            
+
             JOptionPane.showMessageDialog(null, "You Must Add At Least 1 Product To The Order", "No Product Added", 1);
-            
+
         }
-        
     }//GEN-LAST:event_jButton_INSERT_ORDER_ActionPerformed
 
-    // show all orders in a new jframe
-    private void jButton_SHOW_ORDERS_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SHOW_ORDERS_ActionPerformed
-       
-        All_Orders_Form allOrdersForm = new All_Orders_Form();
-                allOrdersForm.pack();
-                allOrdersForm.setVisible(true);
-                allOrdersForm.setLocationRelativeTo(null);
-                allOrdersForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-    }//GEN-LAST:event_jButton_SHOW_ORDERS_ActionPerformed
+    // display products by category
+    private void jComboBox_CATEGORIES_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_CATEGORIES_ActionPerformed
+
+        CLASS.Category category = new CLASS.Category();
+        HashMap<String, Integer> map = category.populateCombo();
+        populateProductJtable(Integer.valueOf(map.get(jComboBox_CATEGORIES_.getSelectedItem().toString()).toString()));
+    }//GEN-LAST:event_jComboBox_CATEGORIES_ActionPerformed
 
     // allow only integer
     private void jTextField_CUSTOMER_IDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CUSTOMER_IDKeyTyped
-       
+
         if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-        
     }//GEN-LAST:event_jTextField_CUSTOMER_IDKeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    // get customer id on jtable mouse clicked
+    private void jTable_CUSTOMERS_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_CUSTOMERS_MouseClicked
 
+        Integer selectedRowIndex = jTable_CUSTOMERS_.getSelectedRow();
+        jTextField_CUSTOMER_ID.setText(jTable_CUSTOMERS_.getValueAt(selectedRowIndex, 0).toString());
+    }//GEN-LAST:event_jTable_CUSTOMERS_MouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
@@ -666,6 +686,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_CLEAR_ORDER_TABLE_;
     private javax.swing.JButton jButton_INSERT_ORDER_;
     private javax.swing.JButton jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEè;
