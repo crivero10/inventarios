@@ -5,17 +5,24 @@
  */
 package java_inventory_application;
 import java.util.*;
+import InventApp.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 /**
  *
  * @author master
  */
 public class PREFACTURACION_FORM extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PREFACTURACION_FORM
-     */
+    Prefactura nuevaPrefactura;
+    
     public PREFACTURACION_FORM() {
         initComponents();
+        nuevaPrefactura = null;
     }
 
     /**
@@ -33,11 +40,10 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jDateChooser_FECHAFINAL = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton_CSVGUARDAR = new javax.swing.JButton();
-        jButton_TXTGUARDAR = new javax.swing.JButton();
         jButton_GENERAR = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable_PREFACTURA = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,21 +54,10 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
 
         jLabel3.setText("Fecha final");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
         jButton_CSVGUARDAR.setText("Guardar CSV");
         jButton_CSVGUARDAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_CSVGUARDARActionPerformed(evt);
-            }
-        });
-
-        jButton_TXTGUARDAR.setText("Guardar TXT");
-        jButton_TXTGUARDAR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_TXTGUARDARActionPerformed(evt);
             }
         });
 
@@ -73,27 +68,37 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
             }
         });
 
+        jTable_PREFACTURA.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Producto", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable_PREFACTURA);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
-                    .addComponent(jButton_GENERAR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser_FECHAINICIAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jDateChooser_FECHAFINAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jButton_GENERAR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser_FECHAINICIAL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser_FECHAFINAL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton_CSVGUARDAR)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_TXTGUARDAR))
+                            .addComponent(jButton_CSVGUARDAR)
                             .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 486, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,14 +114,12 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jDateChooser_FECHAFINAL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_GENERAR, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_CSVGUARDAR)
-                    .addComponent(jButton_TXTGUARDAR))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_CSVGUARDAR)
                 .addContainerGap())
         );
 
@@ -133,7 +136,7 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 563, Short.MAX_VALUE)
+            .addGap(0, 681, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, 0)
@@ -145,17 +148,45 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_CSVGUARDARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CSVGUARDARActionPerformed
-        // TODO add your handling code here:
+        if(nuevaPrefactura != null){
+            JFileChooser fileChooser = new JFileChooser();
+            int retval = fileChooser.showSaveDialog(jPanel1);
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Debes generar la prefactura antes de exportar a CSV", "No existe prefactura",  1);
+        }
     }//GEN-LAST:event_jButton_CSVGUARDARActionPerformed
 
-    private void jButton_TXTGUARDARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TXTGUARDARActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_TXTGUARDARActionPerformed
-
     private void jButton_GENERARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GENERARActionPerformed
+
         Date fechaInicialConsulta = jDateChooser_FECHAINICIAL.getDate();
         Date fechaFinalConsulta = jDateChooser_FECHAFINAL.getDate();
         
+        if(fechaInicialConsulta == null || fechaFinalConsulta == null){
+            JOptionPane.showMessageDialog(null,  "Seleccione un rango de fechas","No hay fechas de consulta", 1);
+            return;
+        }
+        
+        this.nuevaPrefactura = new Prefactura(fechaInicialConsulta, fechaFinalConsulta);
+        nuevaPrefactura.obtenerVentasPeriodo();
+        String[] colNames = {"Nombre del producto","Unidades vendidas","Venta total","Clave del SAT"};
+        Object[][] rows = new Object[nuevaPrefactura.listaProductosVendidos.size()][4];
+        
+        DefaultTableModel model = (DefaultTableModel) jTable_PREFACTURA.getModel();
+        
+        for(int i = 0; i < nuevaPrefactura.listaProductosVendidos.size(); i++){
+            rows[i][0] = nuevaPrefactura.listaProductosVendidos.get(i).getNombreProducto();
+            rows[i][1] = nuevaPrefactura.listaProductosVendidos.get(i).getVolumen();
+            rows[i][2] = nuevaPrefactura.listaProductosVendidos.get(i).getColocacion();
+            rows[i][3] = nuevaPrefactura.listaProductosVendidos.get(i).getSatCodigo();
+        }
+        
+        model.setDataVector(rows, colNames);
+
+
+        jTable_PREFACTURA.setModel(model);
+        jTable_PREFACTURA.setRowHeight(20);
+        jTable_PREFACTURA.setEnabled(false);
     }//GEN-LAST:event_jButton_GENERARActionPerformed
 
     /**
@@ -196,14 +227,13 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_CSVGUARDAR;
     private javax.swing.JButton jButton_GENERAR;
-    private javax.swing.JButton jButton_TXTGUARDAR;
     private com.toedter.calendar.JDateChooser jDateChooser_FECHAFINAL;
     private com.toedter.calendar.JDateChooser jDateChooser_FECHAINICIAL;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable_PREFACTURA;
     // End of variables declaration//GEN-END:variables
 }
