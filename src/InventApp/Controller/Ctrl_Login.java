@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CLASS.Controller;
+package InventApp.Controller;
 
-import CLASS.Model.C_Session;
-import static CLASS.Model.C_Session.insertSession;
-import CLASS.Model.C_User;
+import InventApp.Model.C_Session;
+import static InventApp.Model.C_Session.insertSession;
+import InventApp.Model.C_User;
 import Utilities.Ctrl_Webcam;
 
 /**

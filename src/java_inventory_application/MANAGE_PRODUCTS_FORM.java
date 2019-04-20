@@ -25,7 +25,7 @@ public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
      * Creates new form MANAGE_PRODUCTS_FORM
      */
     String imagePth = null;
-    CLASS.Product product;
+    InventApp.Product product;
     
     public MANAGE_PRODUCTS_FORM() {
         
@@ -49,8 +49,8 @@ public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
     // populate the jtable
     public void populateJtable(String val){
         
-        CLASS.Product prd = new CLASS.Product();
-        ArrayList<CLASS.Product> ProductList = prd.productsList(val);
+        InventApp.Product prd = new InventApp.Product();
+        ArrayList<InventApp.Product> ProductList = prd.productsList(val);
         
             String[] colNames = {"Id","Nombre","Precio","Cantidad en existencia","Unidad de medida","SAT codigo"};
         Object[][] rows = new Object[ProductList.size()][7];
@@ -66,7 +66,7 @@ public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
 
         }
         
-        CLASS.MyTableModel mmd = new CLASS.MyTableModel(rows, colNames);
+        InventApp.MyTableModel mmd = new InventApp.MyTableModel(rows, colNames);
         jTable_Products.setModel(mmd);
         jTable_Products.setRowHeight(80);
         jTable_Products.getColumnModel().getColumn(5).setPreferredWidth(150);
@@ -276,7 +276,7 @@ public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
         try{
             Integer rowIndex = jTable_Products.getSelectedRow();
             Integer id = Integer.valueOf(jTable_Products.getValueAt(rowIndex, 0).toString());
-            CLASS.Product.deleteProduct(id);
+            InventApp.Product.deleteProduct(id);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "You Must Select A Product From The Table", "No Product Selected", 2);
         }

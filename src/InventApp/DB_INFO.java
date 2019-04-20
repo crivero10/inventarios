@@ -1,4 +1,4 @@
-package CLASS;
+package InventApp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -35,7 +35,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
         
         jComboBox_CATEGORIES_ActionPerformed(null);
         
-        CLASS.THE_ORDER ord = new CLASS.THE_ORDER();
+        InventApp.Venta ord = new InventApp.Venta();
         
         // display the new order id in textfield
         try{
@@ -51,7 +51,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
     // populate the categories combobox
     public void BindCombo(){
 
-        CLASS.Category category = new CLASS.Category();
+        InventApp.Category category = new InventApp.Category();
 
         HashMap<String, Integer> map = category.populateCombo();
 
@@ -64,8 +64,8 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
     // populate the customers jtable
     public void populateCustomerJtable(){
         
-        CLASS.Customer customer = new CLASS.Customer();
-        ArrayList<CLASS.Customer> CustomerList = customer.customersList();
+        InventApp.Customer customer = new InventApp.Customer();
+        ArrayList<InventApp.Customer> CustomerList = customer.customersList();
         
         String[] colNames = {"RFC","Nombre","Apellido","Telefono","Email"};
         Object[][] rows = new Object[CustomerList.size()][5];
@@ -89,8 +89,8 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
     // populate the products jtable by selected category from combobox
     public void populateProductJtable(Integer categoryId){
         
-        CLASS.Product prd = new CLASS.Product();
-        ArrayList<CLASS.Product> ProductList = prd.productsInCategoryList(categoryId);
+        InventApp.Product prd = new InventApp.Product();
+        ArrayList<InventApp.Product> ProductList = prd.productsInCategoryList(categoryId);
         
         String[] colNames = {"Id","Name","Price","Quantity","Image","Description"};
         Object[][] rows = new Object[ProductList.size()][7];
@@ -101,18 +101,15 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
             rows[i][2] = ProductList.get(i).getPrice();
             rows[i][3] = ProductList.get(i).getQuantity();
             
-                        ImageIcon pic = new ImageIcon(new ImageIcon
-                                          (ProductList.get(i).getPicture())
-                                           .getImage()
-                                           .getScaledInstance(120, 80, Image.SCALE_SMOOTH));
+                        
             
-            rows[i][4] = pic;
+            rows[i][4] = null;
             
             rows[i][5] = ProductList.get(i).getDescription();
 
         }
         
-        CLASS.MyTableModel mmd = new CLASS.MyTableModel(rows, colNames);
+        InventApp.MyTableModel mmd = new InventApp.MyTableModel(rows, colNames);
         jTable_PRODUCTS_.setModel(mmd);
         jTable_PRODUCTS_.setRowHeight(80);
         jTable_PRODUCTS_.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -596,7 +593,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
             String total;
 
             // insert the order
-            CLASS.THE_ORDER.insertOrder(orderId, orderDate, Integer.valueOf(jTextField_CUSTOMER_ID.getText()));
+            InventApp.Venta.insertOrder(orderId, orderDate, Integer.valueOf(jTextField_CUSTOMER_ID.getText()));
 
             // get the product data
             for(int i = 0; i < jTable_PRODUCTS_IN_ORDER_.getRowCount(); i++)
@@ -607,10 +604,10 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
                 total = jTable_PRODUCTS_IN_ORDER_.getValueAt(i, 4).toString();
 
                 // insert the order details
-                CLASS.THE_ORDER.insertOrderDetails(productId, orderId, qty, price, total);
+                InventApp.Venta.insertOrderDetails(productId, orderId, qty, price, total);
 
                 // display the new order id in textfield
-                CLASS.THE_ORDER ord = new CLASS.THE_ORDER();
+                InventApp.Venta ord = new InventApp.Venta();
                 jTextField_ORDER_ID.setText(String.valueOf(ord.getMaxOrderId() + 1));
             }
 
@@ -627,7 +624,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
     // display products by category
     private void jComboBox_CATEGORIES_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_CATEGORIES_ActionPerformed
 
-        CLASS.Category category = new CLASS.Category();
+        InventApp.Category category = new InventApp.Category();
         HashMap<String, Integer> map = category.populateCombo();
         populateProductJtable(Integer.valueOf(map.get(jComboBox_CATEGORIES_.getSelectedItem().toString()).toString()));
     }//GEN-LAST:event_jComboBox_CATEGORIES_ActionPerformed

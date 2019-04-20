@@ -43,8 +43,8 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
     // function to populate the jtable with users data
     public void populateJtable(){
         
-        CLASS.Model.C_User user = new CLASS.Model.C_User();
-        ArrayList<CLASS.Model.C_User> userList = user.UsersList();
+        InventApp.Model.C_User user = new InventApp.Model.C_User();
+        ArrayList<InventApp.Model.C_User> userList = user.UsersList();
         
         String[] colNames = {"Id","username","password","fullname","Tel","Email"};
         Object[][] rows = new Object[userList.size()][6];
@@ -318,8 +318,8 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
             String tel = jTextField_TEL.getText();
             String email = jTextField_EMAIL.getText();
 
-            CLASS.Model.C_User user = new CLASS.Model.C_User(null,uname,pass,null,fname,tel,email);
-            CLASS.Model.C_User.insertUser(user);
+            InventApp.Model.C_User user = new InventApp.Model.C_User(null,uname,pass,null,fname,tel,email);
+            InventApp.Model.C_User.insertUser(user);
             populateJtable();
         }
         
@@ -341,8 +341,8 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
                 String email = jTextField_EMAIL.getText();
 
                 // username`, `password`, `user_type`, `fullname`, `tel`, `email
-                CLASS.Model.C_User user = new CLASS.Model.C_User(id,uname,pass,null,fname,tel,email);
-                CLASS.Model.C_User.updateUser(user);
+                InventApp.Model.C_User user = new InventApp.Model.C_User(id,uname,pass,null,fname,tel,email);
+                InventApp.Model.C_User.updateUser(user);
                 populateJtable();
             }
             
@@ -358,7 +358,7 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
 
         try{
             Integer id = Integer.valueOf(jTextField_ID.getText());
-            CLASS.Model.C_User.deleteUser(id);
+            InventApp.Model.C_User.deleteUser(id);
             populateJtable(); 
             jButton_CLEAR_ActionPerformed(null);
         }catch(Exception ex){

@@ -234,7 +234,7 @@ public class Edit_Product_Form extends javax.swing.JFrame {
 
     public void BindCombo(){
 
-        CLASS.Category category = new CLASS.Category();
+        InventApp.Category category = new InventApp.Category();
 
         HashMap<String, Integer> map = category.populateCombo();
 
@@ -249,7 +249,7 @@ public class Edit_Product_Form extends javax.swing.JFrame {
     // browse image button
     private void jButton_BROWSE_PICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BROWSE_PICActionPerformed
 
-        CLASS.Myfunc mf = new CLASS.Myfunc();
+        InventApp.Myfunc mf = new InventApp.Myfunc();
         imagePth = mf.browseImage(jLabel_Picture);
         System.out.println(imagePth);
 
@@ -258,8 +258,8 @@ public class Edit_Product_Form extends javax.swing.JFrame {
     // update product
     private void jButton_EDIT_PRODUCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EDIT_PRODUCTActionPerformed
 
-        CLASS.Product product;
-        CLASS.Category category = new CLASS.Category();
+        InventApp.Product product;
+        InventApp.Category category = new InventApp.Category();
 
         HashMap<String, Integer> map = category.populateCombo();
 
@@ -283,9 +283,9 @@ public class Edit_Product_Form extends javax.swing.JFrame {
                         catId = map.get(jComboBox1.getSelectedItem().toString());
                         price = jTextField_Price.getText();
 
-                        product = new CLASS.Product(productId,name,catId,price,img,quantity,description,null);
+                        product = new InventApp.Product(productId,name,catId,price,quantity,description,null);
 
-                        CLASS.Product.updateProduct(product, true);   
+                        InventApp.Product.updateProduct(product, true);   
                     }
                 
             }
@@ -299,8 +299,8 @@ public class Edit_Product_Form extends javax.swing.JFrame {
                         catId = map.get(jComboBox1.getSelectedItem().toString());
                         price = jTextField_Price.getText();
 
-                        product = new CLASS.Product(productId,name,catId,price,null,quantity,description,null);
-                        CLASS.Product.updateProduct(product, false);
+                        product = new InventApp.Product(productId,name,catId,price,quantity,description,null);
+                        InventApp.Product.updateProduct(product, false);
                     }
         }
 

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CLASS;
+package InventApp;
 
-import CLASS.Model.C_Session;
-import CLASS.Model.C_User;
+import InventApp.Model.C_Session;
+import InventApp.Model.C_User;
 
 /**
  *

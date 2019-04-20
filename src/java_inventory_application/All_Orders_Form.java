@@ -1,7 +1,7 @@
 package java_inventory_application;
 
 
-import CLASS.THE_ORDER;
+import InventApp.Venta;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.BufferedWriter;
@@ -55,8 +55,8 @@ public class All_Orders_Form extends javax.swing.JFrame {
     
     public void populateOrderJtable(){
         
-        CLASS.THE_ORDER ord = new CLASS.THE_ORDER();
-        ArrayList<CLASS.THE_ORDER> OrderList = ord.ordersList();
+        InventApp.Venta ord = new InventApp.Venta();
+        ArrayList<InventApp.Venta> OrderList = ord.ordersList();
         
         String[] colNames = {"Id","Date","Customer"};
         Object[][] rows = new Object[OrderList.size()][3];
@@ -151,7 +151,7 @@ public class All_Orders_Form extends javax.swing.JFrame {
 
     private void jButton_PRINT_ORDERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PRINT_ORDERActionPerformed
         
-        Connection connection = CLASS.DB_INFO.getConnection();
+        Connection connection = InventApp.DB_INFO.getConnection();
         String query = "SELECT o.id, c.first_name, c.last_name, o.order_date from order_tbl o, customer c where o.customer_id = c.id and o.id = ? order by o.id desc";
         String query2 = "select odt.product_id, prd.name, odt.quantity, odt.price, odt.total from order_detail odt, product prd where odt.product_id = prd.id and odt.order_id = ?";
 
@@ -217,7 +217,7 @@ public class All_Orders_Form extends javax.swing.JFrame {
                   }
                   
                    bw.write(System.lineSeparator());
-                   bw.write("ORDER TOTAL AMOUNT : " + CLASS.THE_ORDER.getOrderTotalAmount(Integer.valueOf(jTable_ORDERS.getValueAt(index, 0).toString())));
+                   bw.write("ORDER TOTAL AMOUNT : " + InventApp.Venta.getOrderTotalAmount(Integer.valueOf(jTable_ORDERS.getValueAt(index, 0).toString())));
                }
                //close BufferedWriter
                bw.close();

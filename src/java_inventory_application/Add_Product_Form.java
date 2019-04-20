@@ -228,7 +228,7 @@ public class Add_Product_Form extends javax.swing.JFrame {
     // browse image button
     private void jButton_BROWSE_PICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BROWSE_PICActionPerformed
 
-        CLASS.Myfunc mf = new CLASS.Myfunc();
+        InventApp.Myfunc mf = new InventApp.Myfunc();
        imagePth = mf.browseImage(jLabel_Picture);
        System.out.println(imagePth);
         
@@ -237,8 +237,8 @@ public class Add_Product_Form extends javax.swing.JFrame {
     // button insert
     private void jButton_ADD_PRODUCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ADD_PRODUCTActionPerformed
        
-        CLASS.Product product;
-        CLASS.Category category = new CLASS.Category();
+        InventApp.Product product;
+        InventApp.Category category = new InventApp.Category();
 
         HashMap<String, Integer> map = category.populateCombo();
 
@@ -262,9 +262,9 @@ public class Add_Product_Form extends javax.swing.JFrame {
                  Path path = Paths.get(imagePth);
                  img = Files.readAllBytes(path);
 
-                 product = new CLASS.Product(null,name,catId,price,img,quantity,description,null);
+                 product = new InventApp.Product(null,name,catId,price,quantity,description,null);
 
-                 CLASS.Product.insertProduct(product);
+                 InventApp.Product.insertProduct(product);
             }
         }
         catch (IOException ex) {
@@ -296,7 +296,7 @@ public class Add_Product_Form extends javax.swing.JFrame {
     // create a methode to fill combobox with keys and values
     public void BindCombo(){
 
-        CLASS.Category category = new CLASS.Category();
+        InventApp.Category category = new InventApp.Category();
 
         HashMap<String, Integer> map = category.populateCombo();
 

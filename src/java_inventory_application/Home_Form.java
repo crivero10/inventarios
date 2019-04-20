@@ -200,7 +200,11 @@ public class Home_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5_USER_MouseClicked
 
     private void jMenu_FACTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_FACTMouseClicked
-        // TODO add your handling code here:
+        PREFACTURACION_FORM moduloPrefac = new PREFACTURACION_FORM();
+                moduloPrefac.pack();
+                moduloPrefac.setVisible(true);
+                moduloPrefac.setLocationRelativeTo(null);
+                moduloPrefac.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenu_FACTMouseClicked
 
     /**

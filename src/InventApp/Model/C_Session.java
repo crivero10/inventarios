@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CLASS.Model;
+package InventApp.Model;
 
-import CLASS.DB_INFO;
+import InventApp.DB_INFO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

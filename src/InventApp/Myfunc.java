@@ -1,4 +1,4 @@
-package CLASS;
+package InventApp;
 
 import java.awt.Image;
 import java.io.File;

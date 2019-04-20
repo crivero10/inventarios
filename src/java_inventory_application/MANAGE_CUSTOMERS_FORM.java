@@ -47,8 +47,8 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
     // function to populate the jtable with customers data
     public void populateJtable(){
         
-        CLASS.Customer customer = new CLASS.Customer();
-        ArrayList<CLASS.Customer> CustomerList = customer.customersList();
+        InventApp.Customer customer = new InventApp.Customer();
+        ArrayList<InventApp.Customer> CustomerList = customer.customersList();
         
         String[] colNames = {"RFC","Nombre","Apellido","Telefono","Email"};
         Object[][] rows = new Object[CustomerList.size()][5];
@@ -409,7 +409,7 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
     private void jButton_DELETE_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DELETE_ActionPerformed
 
         try{
-            CLASS.Customer.deleteCustomer(this.selectedRFC);
+            InventApp.Customer.deleteCustomer(this.selectedRFC);
             populateJtable();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Select a Customer Before Removing", "No Customer Selected", 1);
@@ -429,8 +429,8 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
                 String rfc = jTextField_RFC.getText();
                 
 
-                CLASS.Customer customer = new CLASS.Customer(100, fname, lname, tel, email, rfc);
-                CLASS.Customer.updateCustomer(this.selectedRFC, customer);
+                InventApp.Customer customer = new InventApp.Customer(100, fname, lname, tel, email, rfc);
+                InventApp.Customer.updateCustomer(this.selectedRFC, customer);
                 populateJtable();
             }
         }catch(Exception ex){
@@ -449,8 +449,8 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
             String email = jTextField_EMAIL.getText();
             String rfc = jTextField_RFC.getText();
 
-            CLASS.Customer customer = new CLASS.Customer(null, fname, lname, tel, email, rfc);
-            CLASS.Customer.insertCustomer(customer);
+            InventApp.Customer customer = new InventApp.Customer(null, fname, lname, tel, email, rfc);
+            InventApp.Customer.insertCustomer(customer);
             populateJtable();
         }
     }//GEN-LAST:event_jButton_INSERT_ActionPerformed
@@ -485,7 +485,7 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
             
             
 
-            CLASS.THE_ORDER order = new CLASS.THE_ORDER();
+            InventApp.Venta order = new InventApp.Venta();
             jLabel_ORDERS_COUNT.setText(order.getCustomerOrdersCount(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
             jLabel_TOTAL_AMOUNT.setText(order.getCustomerOrdersTotalAmount(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));
             jLabel_LAST_ORDER_DATE.setText(order.getCustomerLastOrderDate(Integer.valueOf(jTable_CUSTOMERS_.getValueAt(rowIndex, 0).toString())));

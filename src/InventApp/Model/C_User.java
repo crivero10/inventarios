@@ -1,6 +1,6 @@
-package CLASS.Model;
+package InventApp.Model;
 
-import CLASS.DB_INFO;
+import InventApp.DB_INFO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +51,7 @@ public class C_User {
         try {
             PreparedStatement ps;
             ResultSet rs;
-            ps = CLASS.DB_INFO.getConnection().prepareStatement("SELECT `id`, `username`, `password` , `user_type`, `fullname`, `tel`, `email` FROM `users` WHERE `username` = ? AND `password` = ?");
+            ps = InventApp.DB_INFO.getConnection().prepareStatement("SELECT `id`, `username`, `password` , `user_type`, `fullname`, `tel`, `email` FROM `users` WHERE `username` = ? AND `password` = ?");
             ps.setString(1, UNAME);
             ps.setString(2, PASW);
             

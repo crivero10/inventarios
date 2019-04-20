@@ -1,4 +1,4 @@
-package CLASS;
+package InventApp;
 
 
 import javax.swing.Icon;

@@ -27,7 +27,7 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
      * Creates new form MANAGE_CATEGORIES_FORM
      */
     Integer position = 0;
-    CLASS.Category category = new CLASS.Category();
+    InventApp.Category category = new InventApp.Category();
     public MANAGE_CATEGORIES_FORM() {
         initComponents();
         
@@ -57,7 +57,7 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
     // populate the jtable with categories 'id' & 'name' from database
     public void populateJtable(){
         
-        ArrayList<CLASS.Category> CategoryList = category.categoriesList();
+        ArrayList<InventApp.Category> CategoryList = category.categoriesList();
         
         String[] colNames = {"Id","Name"};
         Object[][] rows = new Object[CategoryList.size()][2];
@@ -78,9 +78,9 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
     // populate list with products in the selected category
     public void populateProductsList(Integer categoryId){
         
-        CLASS.Product prd = new CLASS.Product();
+        InventApp.Product prd = new InventApp.Product();
 
-        ArrayList<CLASS.Product> ProductList = prd.productsInCategoryList(categoryId);
+        ArrayList<InventApp.Product> ProductList = prd.productsInCategoryList(categoryId);
           DefaultListModel model = new DefaultListModel(); 
         
         for(int i = 0; i < ProductList.size(); i++){
@@ -298,9 +298,9 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
         try{
 
             PRODUCTS_IN_CATEGORY_FORM productsInCategoryForm = new PRODUCTS_IN_CATEGORY_FORM();
-            CLASS.Product prd = new CLASS.Product();
+            InventApp.Product prd = new InventApp.Product();
             Integer categoryId = Integer.valueOf(jTable_CATEGORIES_.getValueAt(jTable_CATEGORIES_.getSelectedRow(),0).toString());
-            ArrayList<CLASS.Product> ProductList = prd.productsInCategoryList(categoryId);
+            ArrayList<InventApp.Product> ProductList = prd.productsInCategoryList(categoryId);
 
             String[] colNames = {"Id","Name","Category","Price","Quantity","Image","Description"};
             Object[][] rows = new Object[ProductList.size()][7];
@@ -312,17 +312,12 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
                 rows[i][2] = ProductList.get(i).getPrice();
                 rows[i][3] = ProductList.get(i).getQuantity();
 
-                ImageIcon pic = new ImageIcon(new ImageIcon
-                    (ProductList.get(i).getPicture())
-                    .getImage()
-                    .getScaledInstance(120, 80, Image.SCALE_SMOOTH));
-
-                rows[i][4] = pic;
+                rows[i][4] = null;
 
                 rows[i][5] = ProductList.get(i).getDescription();
             }
 
-            CLASS.MyTableModel mmd = new CLASS.MyTableModel(rows, colNames);
+            InventApp.MyTableModel mmd = new InventApp.MyTableModel(rows, colNames);
             productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.setModel(mmd);
             productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.setRowHeight(80);
             productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.getColumnModel().getColumn(5).setPreferredWidth(150);
@@ -370,7 +365,7 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
     private void jButton_DELETE_CATEGORY_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DELETE_CATEGORY_ActionPerformed
 
         try{
-            CLASS.Category.deleteCategory(Integer.valueOf(jTextField_CATEGORY_ID.getText()));
+            InventApp.Category.deleteCategory(Integer.valueOf(jTextField_CATEGORY_ID.getText()));
             jTextField_CATEGORY_ID.setText("");
             jTextField_CATEGORY_NAME.setText("");
             position = 0;
@@ -388,8 +383,8 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
 
             if(!jTextField_CATEGORY_NAME.getText().equals(""))
             {
-                category = new CLASS.Category(Integer.valueOf(jTextField_CATEGORY_ID.getText()),jTextField_CATEGORY_NAME.getText());
-                CLASS.Category.updateCategory(category);
+                category = new InventApp.Category(Integer.valueOf(jTextField_CATEGORY_ID.getText()),jTextField_CATEGORY_NAME.getText());
+                InventApp.Category.updateCategory(category);
                 populateJtable();
             }
             else{
@@ -407,8 +402,8 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
         try{
             if(!jTextField_CATEGORY_NAME.getText().equals(""))
             {
-                category = new CLASS.Category(null,jTextField_CATEGORY_NAME.getText());
-                CLASS.Category.insertCategory(category);
+                category = new InventApp.Category(null,jTextField_CATEGORY_NAME.getText());
+                InventApp.Category.insertCategory(category);
                 populateJtable();
             }else{
                 JOptionPane.showMessageDialog(null, "Enter The Category Name", "Enter Name", 2);
@@ -443,7 +438,7 @@ public class MANAGE_CATEGORIES_FORM extends javax.swing.JFrame {
     {
 
         try{
-                ArrayList<CLASS.Category> CategoryList = category.categoriesList();
+                ArrayList<InventApp.Category> CategoryList = category.categoriesList();
                 jTextField_CATEGORY_ID.setText(CategoryList.get(pos).getId().toString());
                 jTextField_CATEGORY_NAME.setText(CategoryList.get(pos).getName());
                 jTable_CATEGORIES_.setRowSelectionInterval(pos,pos);

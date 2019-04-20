@@ -149,7 +149,7 @@ public class Login_Form extends javax.swing.JFrame {
         ResultSet rs;
         
         try {
-            ps = CLASS.DB_INFO.getConnection().prepareStatement("SELECT `username`, `password` , `user_type` FROM `users` WHERE `username` = ? AND `password` = ?");
+            ps = InventApp.DB_INFO.getConnection().prepareStatement("SELECT `username`, `password` , `user_type` FROM `users` WHERE `username` = ? AND `password` = ?");
             ps.setString(1, jTextField_Username.getText());
             ps.setString(2, String.valueOf(jPasswordField_UserPass.getPassword()));
             

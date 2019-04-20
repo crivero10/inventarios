@@ -1,4 +1,4 @@
-package CLASS;
+package InventApp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,20 +24,18 @@ public class Product {
     private String name ;
     private Integer category_id ;
     private String price ;
-    private byte[] picture ;
     private Integer quantity ;
     private String description ;
     private String category;
 
     public Product(){}
     
-    public Product(Integer ID, String NAME, Integer CATEGORY_ID, String PRICE, byte[] PICTURE, Integer QUANTITY, String DESCRIPTION,String categoryName)
+    public Product(Integer ID, String NAME, Integer CATEGORY_ID, String PRICE, Integer QUANTITY, String DESCRIPTION,String categoryName)
     {
         this.id = ID;
         this.name = NAME;
         this.category_id = CATEGORY_ID;
         this.price = PRICE;
-        this.picture = PICTURE;
         this.quantity = QUANTITY;
         this.description = DESCRIPTION;
         this.category = categoryName;
@@ -52,14 +50,13 @@ public class Product {
         PreparedStatement ps;
         
         try {
-            ps = con.prepareStatement("INSERT INTO `product`(`name`, `quantity`, `price`, `picture`, `category_id`, `description`) VALUES (?,?,?,?,?,?)"); // https://bit.ly/2Hh09fD
+            ps = con.prepareStatement("INSERT INTO `product`(`name`, `quantity`, `price`, `category_id`, `description`) VALUES (?,?,?,?,?)"); // https://bit.ly/2Hh09fD
 
             ps.setString(1, product.getName());
             ps.setInt(2, product.getQuantity());
             ps.setString(3, product.getPrice());
-            ps.setBytes(4, product.getPicture());
-            ps.setInt(5, product.getCategory_id());
-            ps.setString(6, product.getDescription());
+            ps.setInt(4, product.getCategory_id());
+            ps.setString(5, product.getDescription());
 
             if(ps.executeUpdate() != 0){
                 JOptionPane.showMessageDialog(null, "New Product Added");
@@ -88,15 +85,14 @@ public class Product {
         {
         
             try {
-            ps = con.prepareStatement("UPDATE `product` SET `name`=?,`quantity`=?,`price`=?,`picture`=?,`category_id`=?,`description`=? WHERE `id` = ?");
+            ps = con.prepareStatement("UPDATE `product` SET `name`=?,`quantity`=?,`price`=?,`category_id`=?,`description`=? WHERE `id` = ?");
 
             ps.setString(1, product.getName());
             ps.setInt(2, product.getQuantity());
             ps.setString(3, product.getPrice());
-            ps.setBytes(4, product.getPicture());
-            ps.setInt(5, product.getCategory_id());
-            ps.setString(6, product.getDescription());
-            ps.setInt(7, product.getId());
+            ps.setInt(4, product.getCategory_id());
+            ps.setString(5, product.getDescription());
+            ps.setInt(6, product.getId());
 
             if(ps.executeUpdate() != 0){
                 JOptionPane.showMessageDialog(null, "Product Updated");
@@ -190,7 +186,7 @@ public class Product {
         
                //String query = "SELECT product.id, product.name, category_id, quantity, price, picture,description,category.name as 'category' FROM product INNER JOIN category ON category.id = product.category_id";
         
-               String query = "SELECT product.id, product.name,category_id, quantity, price, picture,description,category.name as 'category'\n" +
+               String query = "SELECT product.id, product.name,category_id, quantity, price, description,category.name as 'category'\n" +
 "  FROM product\n" +
 "INNER JOIN category ON category.id = product.category_id\n" +
 "WHERE\n" +
@@ -213,7 +209,6 @@ public class Product {
                                  rs.getString("name"), 
                                  rs.getInt("category_id"),
                                  rs.getString("price"),
-                                 rs.getBytes("picture"),
                                  rs.getInt("quantity"),
                                  rs.getString("description"),
                                  rs.getString("category")
@@ -242,7 +237,7 @@ public class Product {
         ResultSet rs;
         PreparedStatement ps;
         
-               String query = "SELECT product.id, product.name,category_id, quantity, price, picture,description FROM product WHERE category_id = ?";
+               String query = "SELECT product.id, product.name,category_id, quantity, price, description FROM product WHERE category_id = ?";
         
         try {
             ps = connection.prepareStatement(query);
@@ -256,7 +251,6 @@ public class Product {
                                  rs.getString("name"), 
                                  rs.getInt("category_id"),
                                  rs.getString("price"),
-                                 rs.getBytes("picture"),
                                  rs.getInt("quantity"),
                                  rs.getString("description"),
                                  null
@@ -311,13 +305,6 @@ public class Product {
         this.price = price;
     }
 
-    public byte[] getPicture() {
-        return picture;
-    }
-
-    public void setPicture(byte[] picture) {
-        this.picture = picture;
-    }
 
     public Integer getQuantity() {
         return quantity;
