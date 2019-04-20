@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author Jerry
  */
-public class Edit_Product_Form extends javax.swing.JFrame {
+public class EditProductFormViewController extends javax.swing.JFrame {
 
     /**
      * Creates new form EDIT_PRODUCT_FORM
@@ -32,7 +32,7 @@ public class Edit_Product_Form extends javax.swing.JFrame {
     // get the id of the product to edit from the manage product form
     public Integer productId;
     
-    public Edit_Product_Form() {
+    public EditProductFormViewController() {
         initComponents();
         
         // populate the combobox with key and value
@@ -290,7 +290,7 @@ public class Edit_Product_Form extends javax.swing.JFrame {
                 
             }
             catch (IOException ex) {
-                Logger.getLogger(Edit_Product_Form.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditProductFormViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{ // not updating the image to
              if(verifFields())
@@ -361,21 +361,23 @@ public class Edit_Product_Form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Edit_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProductFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Edit_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProductFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Edit_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProductFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Edit_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditProductFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Edit_Product_Form().setVisible(true);
+                new EditProductFormViewController().setVisible(true);
             }
         });
     }

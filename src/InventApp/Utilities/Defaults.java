@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utilities;
+package InventApp.Utilities;
 
-import Utilities.Ctrl_Webcam.PictureType;
+import InventApp.Utilities.Ctrl_Webcam.PictureType;
 
 /**
  *

@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 
 import java.io.IOException;
@@ -18,15 +18,15 @@ import javax.swing.JOptionPane;
  *
  * @author Jerry
  */
-public class Add_Product_Form extends javax.swing.JFrame {
+public class AddProductViewController extends javax.swing.JFrame {
 
     /**
-     * Creates new form Add_Product_Form
+     * Creates new form AddProductViewController
      */
     
     // get the image path
     String imagePth = null;
-    public Add_Product_Form() {
+    public AddProductViewController() {
         initComponents();
         
         // populate the combobox with key and value
@@ -349,20 +349,21 @@ public class Add_Product_Form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Add_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Add_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Add_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Add_Product_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddProductViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Add_Product_Form().setVisible(true);
+                new AddProductViewController().setVisible(true);
             }
         });
     }

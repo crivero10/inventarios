@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 
 import InventApp.Venta;
@@ -29,12 +29,12 @@ import javax.swing.table.JTableHeader;
  *
  * @author Jerry
  */
-public class All_Orders_Form extends javax.swing.JFrame {
+public class SaleListingViewController extends javax.swing.JFrame {
 
     /**
      * Creates new form All_Orders_Form
      */
-    public All_Orders_Form() {
+    public SaleListingViewController() {
         initComponents();
         
         populateOrderJtable();
@@ -226,7 +226,7 @@ public class All_Orders_Form extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "Data Exported");
         
         } catch (Exception ex) {
-            Logger.getLogger(All_Orders_Form.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SaleListingViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton_PRINT_ORDERActionPerformed
@@ -248,20 +248,21 @@ public class All_Orders_Form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(All_Orders_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleListingViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(All_Orders_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleListingViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(All_Orders_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleListingViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(All_Orders_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleListingViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new All_Orders_Form().setVisible(true);
+                new SaleListingViewController().setVisible(true);
             }
         });
     }

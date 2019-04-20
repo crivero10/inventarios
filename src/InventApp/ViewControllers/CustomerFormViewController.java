@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -18,13 +18,13 @@ import javax.swing.table.JTableHeader;
  *
  * @author Jerry
  */
-public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
+public class CustomerFormViewController extends javax.swing.JFrame {
 
     /**
-     * Creates new form MANAGE_CUSTOMERS_FORM
+     * Creates new form CustomerFormViewController
      */
     String selectedRFC = "00000000000";
-    public MANAGE_CUSTOMERS_FORM() {
+    public CustomerFormViewController() {
         initComponents();
         
         
@@ -530,20 +530,21 @@ public class MANAGE_CUSTOMERS_FORM extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_CUSTOMERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_CUSTOMERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_CUSTOMERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_CUSTOMERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MANAGE_CUSTOMERS_FORM().setVisible(true);
+                new CustomerFormViewController().setVisible(true);
             }
         });
     }

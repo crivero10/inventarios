@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -19,15 +19,15 @@ import javax.swing.table.JTableHeader;
  *
  * @author Jerry
  */
-public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
+public class InventoryViewController extends javax.swing.JFrame {
 
     /**
-     * Creates new form MANAGE_PRODUCTS_FORM
+     * Creates new form InventoryViewController
      */
     String imagePth = null;
     InventApp.Product product;
     
-    public MANAGE_PRODUCTS_FORM() {
+    public InventoryViewController() {
         
         initComponents();
        
@@ -219,7 +219,7 @@ public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
     // button insert product
     private void jButton_INSERT_PRODUCT_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_INSERT_PRODUCT_ActionPerformed
        
-        Add_Product_Form addProductForm = new Add_Product_Form();
+        AddProductViewController addProductForm = new AddProductViewController();
                 addProductForm.pack();
                 addProductForm.setVisible(true);
                 addProductForm.setLocationRelativeTo(null);
@@ -241,7 +241,7 @@ public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
         try{
 
             // open the edit product form and display data into the fields
-            Edit_Product_Form editProductForm = new Edit_Product_Form();
+            EditProductFormViewController editProductForm = new EditProductFormViewController();
 
             Integer rowIndex = jTable_Products.getSelectedRow();
 
@@ -307,20 +307,21 @@ public class MANAGE_PRODUCTS_FORM extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_PRODUCTS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventoryViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_PRODUCTS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventoryViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_PRODUCTS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventoryViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_PRODUCTS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventoryViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MANAGE_PRODUCTS_FORM().setVisible(true);
+                new InventoryViewController().setVisible(true);
             }
         });
     }

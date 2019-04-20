@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,13 +13,13 @@ import javax.swing.JFrame;
  *
  * @author Jerry
  */
-public class Home_Form extends javax.swing.JFrame {
+public class HomeFormViewController extends javax.swing.JFrame {
 
     /**
      * Creates new form Home_Form
      */
     
-    public Home_Form() {
+    public HomeFormViewController() {
         initComponents();
 
         ImageIcon imgThisImg = new ImageIcon("src\\images\\my_store.png");
@@ -147,7 +147,7 @@ public class Home_Form extends javax.swing.JFrame {
     // open the product form
     private void jMenu_PRODUCT_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_PRODUCT_MouseClicked
         
-                MANAGE_PRODUCTS_FORM productForm = new MANAGE_PRODUCTS_FORM();
+                InventoryViewController productForm = new InventoryViewController();
                 productForm.pack();
                 productForm.setVisible(true);
                 productForm.setLocationRelativeTo(null);
@@ -158,7 +158,7 @@ public class Home_Form extends javax.swing.JFrame {
     // open the category form
     private void jMenu_CATEGORY_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_CATEGORY_MouseClicked
         
-        MANAGE_CATEGORIES_FORM categoryForm = new MANAGE_CATEGORIES_FORM();
+        CategoriesFormViewController categoryForm = new CategoriesFormViewController();
                 categoryForm.pack();
                 categoryForm.setVisible(true);
                 categoryForm.setLocationRelativeTo(null);
@@ -169,7 +169,7 @@ public class Home_Form extends javax.swing.JFrame {
     // open the customer form
     private void jMenu_CUSTOMER_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_CUSTOMER_MouseClicked
         
-        MANAGE_CUSTOMERS_FORM customerForm = new MANAGE_CUSTOMERS_FORM();
+        CustomerFormViewController customerForm = new CustomerFormViewController();
                 customerForm.pack();
                 customerForm.setVisible(true);
                 customerForm.setLocationRelativeTo(null);
@@ -180,7 +180,7 @@ public class Home_Form extends javax.swing.JFrame {
     // open the order form
     private void jMenu_ORDER_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_ORDER_MouseClicked
         
-        MANAGE_ORDERS_FORM orderForm = new MANAGE_ORDERS_FORM();
+        POSViewController orderForm = new POSViewController();
                 orderForm.pack();
                 orderForm.setVisible(true);
                 orderForm.setLocationRelativeTo(null);
@@ -191,7 +191,7 @@ public class Home_Form extends javax.swing.JFrame {
     // open the user form
     private void jMenu5_USER_MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5_USER_MouseClicked
         
-        MANAGE_USERS_FORM userForm = new MANAGE_USERS_FORM();
+        UserManagementViewController userForm = new UserManagementViewController();
                 userForm.pack();
                 userForm.setVisible(true);
                 userForm.setLocationRelativeTo(null);
@@ -200,7 +200,7 @@ public class Home_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5_USER_MouseClicked
 
     private void jMenu_FACTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_FACTMouseClicked
-        PREFACTURACION_FORM moduloPrefac = new PREFACTURACION_FORM();
+        PrefacturacionViewController moduloPrefac = new PrefacturacionViewController();
                 moduloPrefac.pack();
                 moduloPrefac.setVisible(true);
                 moduloPrefac.setLocationRelativeTo(null);
@@ -224,20 +224,21 @@ public class Home_Form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeFormViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home_Form().setVisible(true);
+                new HomeFormViewController().setVisible(true);
             }
         });
     }

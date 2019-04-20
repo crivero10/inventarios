@@ -8,7 +8,7 @@ package InventApp.Controller;
 import InventApp.Model.C_Session;
 import static InventApp.Model.C_Session.insertSession;
 import InventApp.Model.C_User;
-import Utilities.Ctrl_Webcam;
+import InventApp.Utilities.Ctrl_Webcam;
 
 /**
  *

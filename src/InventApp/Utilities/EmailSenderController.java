@@ -1,4 +1,4 @@
-package Utilities;
+package InventApp.Utilities;
 
 import java.util.Properties;
 import javax.mail.*;

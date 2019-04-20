@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -17,12 +17,12 @@ import javax.swing.table.JTableHeader;
  *
  * @author Jerry
  */
-public class MANAGE_USERS_FORM extends javax.swing.JFrame {
+public class UserManagementViewController extends javax.swing.JFrame {
 
     /**
      * Creates new form MANAGE_USERS_FORM
      */
-    public MANAGE_USERS_FORM() {
+    public UserManagementViewController() {
         initComponents();
         
         populateJtable();
@@ -412,20 +412,21 @@ public class MANAGE_USERS_FORM extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_USERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserManagementViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_USERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserManagementViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_USERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserManagementViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_USERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserManagementViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MANAGE_USERS_FORM().setVisible(true);
+                new UserManagementViewController().setVisible(true);
             }
         });
     }

@@ -1,4 +1,4 @@
-package java_inventory_application;
+package InventApp.ViewControllers;
 
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -21,12 +21,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Jerry
  */
-public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
+public class POSViewController extends javax.swing.JFrame {
 
     /**
      * Creates new form MANAGE_ORDERS_FORM
      */
-    public MANAGE_ORDERS_FORM() {
+    public POSViewController() {
         initComponents();
         
         BindCombo();
@@ -557,7 +557,7 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
     // show all orders in a new jframe
     private void jButton_SHOW_ORDERS_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SHOW_ORDERS_ActionPerformed
 
-        All_Orders_Form allOrdersForm = new All_Orders_Form();
+        SaleListingViewController allOrdersForm = new SaleListingViewController();
         allOrdersForm.pack();
         allOrdersForm.setVisible(true);
         allOrdersForm.setLocationRelativeTo(null);
@@ -662,20 +662,23 @@ public class MANAGE_ORDERS_FORM extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_ORDERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(POSViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_ORDERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(POSViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_ORDERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(POSViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MANAGE_ORDERS_FORM.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(POSViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MANAGE_ORDERS_FORM().setVisible(true);
+                new POSViewController().setVisible(true);
             }
         });
     }
