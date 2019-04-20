@@ -6,11 +6,15 @@
 package java_inventory_application;
 import java.util.*;
 import InventApp.*;
+import java.util.stream.Collectors;   
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JOptionPane;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.FileOutputStream;
 /**
  *
@@ -150,7 +154,26 @@ public class PREFACTURACION_FORM extends javax.swing.JFrame {
     private void jButton_CSVGUARDARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CSVGUARDARActionPerformed
         if(nuevaPrefactura != null){
             JFileChooser fileChooser = new JFileChooser();
-            int retval = fileChooser.showSaveDialog(jPanel1);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("*.csv", "csv");
+            fileChooser.setFileFilter(filter);
+            int fcReturnValue = fileChooser.showSaveDialog(jPanel1);
+            if(fcReturnValue == JFileChooser.APPROVE_OPTION){
+                File temp = fileChooser.getSelectedFile();
+                File file = new File(temp.getPath() + ".csv");
+                try{
+                    FileWriter writer = new FileWriter(file);
+                    List<Integer> intList = Arrays.asList(1, 2, 3);
+                    String result = "producto, unidades vendidas, venta total, codigo sat\n";
+                    for(Object o : nuevaPrefactura.listaProductosVendidos){
+                        result = result + o.toString() + "\n";
+                    }
+                    writer.write(result);
+                    writer.close();
+                }
+                catch(IOException e){
+                    System.out.println("Error al escribir el archivo CSV");
+                }
+            }
         }
         else{
             JOptionPane.showMessageDialog(null,"Debes generar la prefactura antes de exportar a CSV", "No existe prefactura",  1);
