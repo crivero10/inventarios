@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -53,11 +53,13 @@ public class POSViewController extends javax.swing.JFrame {
 
         InventApp.Category category = new InventApp.Category();
 
-        HashMap<String, Integer> map = category.populateCombo();
+        TreeMap<String, Integer> map = category.populateCombo();
 
         for(String s : map.keySet()){
             jComboBox_CATEGORIES_.addItem(s);
         }
+        
+        
     }
 
     
@@ -82,7 +84,7 @@ public class POSViewController extends javax.swing.JFrame {
         model.setDataVector(rows, colNames);
 
         jTable_CUSTOMERS_.setModel(model);
-        jTable_CUSTOMERS_.setRowHeight(45);
+        jTable_CUSTOMERS_.setRowHeight(20);
     }
     
     
@@ -90,7 +92,11 @@ public class POSViewController extends javax.swing.JFrame {
     public void populateProductJtable(Integer categoryId){
         
         InventApp.Product prd = new InventApp.Product();
-        ArrayList<InventApp.Product> ProductList = prd.productsInCategoryList(categoryId);
+        ArrayList<InventApp.Product> ProductList;
+        if(categoryId != 9999)
+            ProductList = prd.productsInCategoryList(categoryId);
+        else
+            ProductList = prd.getAllProducts();
         
         String[] colNames = {"Id","Name","Price","Quantity","Image","Description"};
         Object[][] rows = new Object[ProductList.size()][7];
@@ -100,23 +106,54 @@ public class POSViewController extends javax.swing.JFrame {
             rows[i][1] = ProductList.get(i).getName();
             rows[i][2] = ProductList.get(i).getPrice();
             rows[i][3] = ProductList.get(i).getQuantity();
-            
-                        
-            
             rows[i][4] = null;
-            
             rows[i][5] = ProductList.get(i).getDescription();
-
         }
         
         InventApp.MyTableModel mmd = new InventApp.MyTableModel(rows, colNames);
         jTable_PRODUCTS_.setModel(mmd);
-        jTable_PRODUCTS_.setRowHeight(80);
+        jTable_PRODUCTS_.setRowHeight(20);
         jTable_PRODUCTS_.getColumnModel().getColumn(0).setPreferredWidth(50);
         jTable_PRODUCTS_.getColumnModel().getColumn(5).setPreferredWidth(120);
         jTable_PRODUCTS_.getColumnModel().getColumn(4).setPreferredWidth(120);
     }
     
+    public void populateProductJtableWithFilter(Integer categoryId, String filter){
+        
+        InventApp.Product prd = new InventApp.Product();
+        ArrayList<InventApp.Product> ProductList;
+        ArrayList<InventApp.Product> TempProductList;
+        if(categoryId != 9999)
+            TempProductList = prd.productsInCategoryList(categoryId);
+        else
+            TempProductList = prd.getAllProducts();
+        
+        ProductList = new ArrayList<InventApp.Product>();
+        for(InventApp.Product p : TempProductList){
+            if(p.containsSignificantSubstr(filter)){
+                ProductList.add(p);
+            }
+        }
+        
+        String[] colNames = {"Id","Name","Price","Quantity","Image","Description"};
+        Object[][] rows = new Object[ProductList.size()][7];
+        
+        for(int i = 0; i < ProductList.size(); i++){
+            rows[i][0] = ProductList.get(i).getId();
+            rows[i][1] = ProductList.get(i).getName();
+            rows[i][2] = ProductList.get(i).getPrice();
+            rows[i][3] = ProductList.get(i).getQuantity();
+            rows[i][4] = null;
+            rows[i][5] = ProductList.get(i).getDescription();
+        }
+        
+        InventApp.MyTableModel mmd = new InventApp.MyTableModel(rows, colNames);
+        jTable_PRODUCTS_.setModel(mmd);
+        jTable_PRODUCTS_.setRowHeight(20);
+        jTable_PRODUCTS_.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTable_PRODUCTS_.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTable_PRODUCTS_.getColumnModel().getColumn(4).setPreferredWidth(120);
+    }
     
     // get total amount of the product added to the order table
     // and display the value into jlabel
@@ -163,9 +200,8 @@ public class POSViewController extends javax.swing.JFrame {
         jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_ = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel_TOTAL = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_QUERY = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -238,7 +274,7 @@ public class POSViewController extends javax.swing.JFrame {
         });
 
         jButton_INSERT_ORDER_.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton_INSERT_ORDER_.setText("Hacer Checkout");
+        jButton_INSERT_ORDER_.setText("Checkout");
         jButton_INSERT_ORDER_.setToolTipText("");
         jButton_INSERT_ORDER_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,27 +324,20 @@ public class POSViewController extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_TOTAL, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                .addGap(0, 52, Short.MAX_VALUE)
+                .addComponent(jLabel_TOTAL, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_TOTAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel_TOTAL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
-        jTextField1.setToolTipText("Nombre de producto");
+        jTextField_QUERY.setToolTipText("Nombre de producto");
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Pagar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -320,32 +349,28 @@ public class POSViewController extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox_CATEGORIES_, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_QUERY, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField_ORDER_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_CUSTOMER_ID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField_ORDER_ID, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField_CUSTOMER_ID, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton_INSERT_ORDER_, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton_SHOW_ORDERS_, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEè, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,11 +379,12 @@ public class POSViewController extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton_TRANSFER_FROM_PRODUCT_TO_ORDER_, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jButton_INSERT_ORDER_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -368,11 +394,11 @@ public class POSViewController extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox_CATEGORIES_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_QUERY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -388,23 +414,22 @@ public class POSViewController extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(151, 151, 151)
+                        .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_INSERT_ORDER_)
                             .addComponent(jButton_SHOW_ORDERS_)
                             .addComponent(jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEè)
                             .addComponent(jButton_CLEAR_ORDER_TABLE_))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 207, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_INSERT_ORDER_))
                         .addGap(3, 3, 3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(171, 171, 171)
@@ -421,8 +446,8 @@ public class POSViewController extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,11 +459,11 @@ public class POSViewController extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String substr = jTextField_QUERY.getText();
+        InventApp.Category category = new InventApp.Category();
+        TreeMap<String, Integer> map = category.populateCombo();
+        populateProductJtableWithFilter(Integer.valueOf(map.get(jComboBox_CATEGORIES_.getSelectedItem().toString()).toString()), substr);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -625,7 +650,7 @@ public class POSViewController extends javax.swing.JFrame {
     private void jComboBox_CATEGORIES_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_CATEGORIES_ActionPerformed
 
         InventApp.Category category = new InventApp.Category();
-        HashMap<String, Integer> map = category.populateCombo();
+        TreeMap<String, Integer> map = category.populateCombo();
         populateProductJtable(Integer.valueOf(map.get(jComboBox_CATEGORIES_.getSelectedItem().toString()).toString()));
     }//GEN-LAST:event_jComboBox_CATEGORIES_ActionPerformed
 
@@ -686,7 +711,6 @@ public class POSViewController extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton_CLEAR_ORDER_TABLE_;
     private javax.swing.JButton jButton_INSERT_ORDER_;
     private javax.swing.JButton jButton_REMOVE_PRODUCT_FROM_ORDER_TABLEè;
@@ -706,8 +730,8 @@ public class POSViewController extends javax.swing.JFrame {
     private javax.swing.JTable jTable_CUSTOMERS_;
     private javax.swing.JTable jTable_PRODUCTS_;
     private javax.swing.JTable jTable_PRODUCTS_IN_ORDER_;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField_CUSTOMER_ID;
     private javax.swing.JTextField jTextField_ORDER_ID;
+    private javax.swing.JTextField jTextField_QUERY;
     // End of variables declaration//GEN-END:variables
 }

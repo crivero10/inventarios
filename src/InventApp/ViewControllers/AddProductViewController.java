@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
 /*
@@ -52,12 +52,9 @@ public class AddProductViewController extends javax.swing.JFrame {
         jTextField_Quantity = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField_Name = new javax.swing.JTextField();
-        jLabel_Picture = new javax.swing.JLabel();
-        jButton_BROWSE_PIC = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton_ADD_PRODUCT = new javax.swing.JButton();
         jButton_CANCEL = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +62,7 @@ public class AddProductViewController extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Descripcion:");
+        jLabel7.setText("SKU:");
 
         jTextField_Description.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -81,7 +78,7 @@ public class AddProductViewController extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Cantidad:");
+        jLabel3.setText("Existencia:");
 
         jTextField_Quantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField_Quantity.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -95,19 +92,6 @@ public class AddProductViewController extends javax.swing.JFrame {
         jLabel4.setText("Nombre:");
 
         jTextField_Name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel_Picture.setBackground(new java.awt.Color(255, 255, 204));
-        jLabel_Picture.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel_Picture.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_Picture.setOpaque(true);
-
-        jButton_BROWSE_PIC.setText("Buscar imagen");
-        jButton_BROWSE_PIC.setToolTipText("");
-        jButton_BROWSE_PIC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_BROWSE_PICActionPerformed(evt);
-            }
-        });
 
         jButton_ADD_PRODUCT.setBackground(new java.awt.Color(30, 130, 76));
         jButton_ADD_PRODUCT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -129,51 +113,32 @@ public class AddProductViewController extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Imagen");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton_CANCEL, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_ADD_PRODUCT, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField_Description, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField_Quantity)
-                                    .addComponent(jTextField_Price)
-                                    .addComponent(jTextField_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton_BROWSE_PIC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                                    .addComponent(jLabel_Picture, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_Description)
+                    .addComponent(jTextField_Quantity)
+                    .addComponent(jTextField_Price)
+                    .addComponent(jTextField_Name))
+                .addGap(19, 19, 19))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(254, Short.MAX_VALUE)
+                .addComponent(jButton_CANCEL, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_ADD_PRODUCT, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(284, 284, 284))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +147,7 @@ public class AddProductViewController extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,94 +163,64 @@ public class AddProductViewController extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField_Description, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_Picture, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addComponent(jButton_BROWSE_PIC)
-                .addGap(64, 64, 64)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_ADD_PRODUCT, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_CANCEL, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addComponent(jButton_CANCEL, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_ADD_PRODUCT, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // browse image button
-    private void jButton_BROWSE_PICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BROWSE_PICActionPerformed
+    // close the button
+    private void jButton_CANCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CANCELActionPerformed
 
-        InventApp.Myfunc mf = new InventApp.Myfunc();
-       imagePth = mf.browseImage(jLabel_Picture);
-       System.out.println(imagePth);
-        
-    }//GEN-LAST:event_jButton_BROWSE_PICActionPerformed
+        System.exit(0);
+
+    }//GEN-LAST:event_jButton_CANCELActionPerformed
 
     // button insert
     private void jButton_ADD_PRODUCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ADD_PRODUCTActionPerformed
-       
+
         InventApp.Product product;
         InventApp.Category category = new InventApp.Category();
 
-        HashMap<String, Integer> map = category.populateCombo();
+        TreeMap<String, Integer> map = category.populateCombo();
 
         String name = jTextField_Name.getText();
         String price;
         String description = jTextField_Description.getText();
         Integer quantity;
         Integer catId;
+        if(verifFields()){
+            quantity = Integer.valueOf(jTextField_Quantity.getText());
+            catId = map.get(jComboBox1.getSelectedItem().toString());
+            price = jTextField_Price.getText();
+            product = new InventApp.Product(null,name,catId,price,quantity,description,null);
+            InventApp.Product.insertProduct(product);
+        }
         
-        byte[] img;
-        if(imagePth != null){
-        try {
-            if(verifFields())
-            {
-                quantity = Integer.valueOf(jTextField_Quantity.getText());
-                
-                // get the category id
-                catId = map.get(jComboBox1.getSelectedItem().toString());
-                price = jTextField_Price.getText();
-
-                 Path path = Paths.get(imagePth);
-                 img = Files.readAllBytes(path);
-
-                 product = new InventApp.Product(null,name,catId,price,quantity,description,null);
-
-                 InventApp.Product.insertProduct(product);
-            }
-        }
-        catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage());
-        }
-        }else{
-            JOptionPane.showMessageDialog(null, "You Must Select A Profile Picture");
-        }
-
     }//GEN-LAST:event_jButton_ADD_PRODUCTActionPerformed
-
-    // close the button
-    private void jButton_CANCELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CANCELActionPerformed
-        
-        System.exit(0);
-        
-    }//GEN-LAST:event_jButton_CANCELActionPerformed
 
     // Allow OnLy Numbers on key typed
     private void jTextField_QuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_QuantityKeyTyped
-       
+
         if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
@@ -298,7 +233,7 @@ public class AddProductViewController extends javax.swing.JFrame {
 
         InventApp.Category category = new InventApp.Category();
 
-        HashMap<String, Integer> map = category.populateCombo();
+        TreeMap<String, Integer> map = category.populateCombo();
 
         for(String s : map.keySet()){
 
@@ -370,7 +305,6 @@ public class AddProductViewController extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_ADD_PRODUCT;
-    private javax.swing.JButton jButton_BROWSE_PIC;
     private javax.swing.JButton jButton_CANCEL;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel3;
@@ -378,8 +312,6 @@ public class AddProductViewController extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel_Picture;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField_Description;
     private javax.swing.JTextField jTextField_Name;

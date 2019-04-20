@@ -52,23 +52,22 @@ public class InventoryViewController extends javax.swing.JFrame {
         InventApp.Product prd = new InventApp.Product();
         ArrayList<InventApp.Product> ProductList = prd.productsList(val);
         
-            String[] colNames = {"Id","Nombre","Precio","Cantidad en existencia","Unidad de medida","SAT codigo"};
+        String[] colNames = {"SKU","Nombre","Precio","Cantidad en existencia","Unidad de medida","SAT codigo"};
         Object[][] rows = new Object[ProductList.size()][7];
         
         for(int i = 0; i < ProductList.size(); i++){
-            rows[i][0] = ProductList.get(i).getId();
+            rows[i][0] = ProductList.get(i).getDescription();
             rows[i][1] = ProductList.get(i).getName();
             rows[i][2] = ProductList.get(i).getPrice();
-            rows[i][3] = ProductList.get(i).getQuantity();
-            
-            rows[i][4] = ProductList.get(i).getDescription();
+            rows[i][3] = ProductList.get(i).getQuantity();            
+            rows[i][4] = new String("Pieza");
             rows[i][5] = ProductList.get(i).getCategoryName(ProductList.get(i).getId());
 
         }
         
         InventApp.MyTableModel mmd = new InventApp.MyTableModel(rows, colNames);
         jTable_Products.setModel(mmd);
-        jTable_Products.setRowHeight(80);
+        jTable_Products.setRowHeight(20);
         jTable_Products.getColumnModel().getColumn(5).setPreferredWidth(150);
         jTable_Products.getColumnModel().getColumn(4).setPreferredWidth(120);
     }
@@ -245,26 +244,20 @@ public class InventoryViewController extends javax.swing.JFrame {
 
             Integer rowIndex = jTable_Products.getSelectedRow();
 
-            editProductForm.productId = Integer.valueOf(jTable_Products.getValueAt(rowIndex, 0).toString());
+            editProductForm.jTextField_Description.setText(jTable_Products.getValueAt(rowIndex, 0).toString());
             editProductForm.jTextField_Name.setText(jTable_Products.getValueAt(rowIndex, 1).toString());
             editProductForm.jTextField_Price.setText(jTable_Products.getValueAt(rowIndex, 2).toString());
             editProductForm.jTextField_Quantity.setText(jTable_Products.getValueAt(rowIndex, 3).toString());
-            editProductForm.jTextField_Description.setText(jTable_Products.getValueAt(rowIndex, 5).toString());
-
-            editProductForm.jComboBox1.setSelectedItem(jTable_Products.getValueAt(rowIndex, 6));
+            editProductForm.jComboBox1.setSelectedItem(jTable_Products.getValueAt(rowIndex, 5));
 
             // display the image in jlabel
-             ImageIcon image1 = (ImageIcon)jTable_Products.getValueAt(rowIndex, 4);
-            Image image2 = image1.getImage().getScaledInstance(editProductForm.jLabel_Picture.getWidth(), editProductForm.jLabel_Picture.getHeight()
-                     , Image.SCALE_SMOOTH);
-            ImageIcon image3 = new ImageIcon(image2);
-            editProductForm.jLabel_Picture.setIcon(image3);
 
             editProductForm.setVisible(true);
                     editProductForm.pack();
                     editProductForm.setLocationRelativeTo(null);
                     editProductForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }catch(Exception Ex){
+            System.out.println(Ex);
             JOptionPane.showMessageDialog(null, "You Must Select A Product From The Table", "No Product Selected", 2);
         }
     }//GEN-LAST:event_jButton_UPDATE_PRODUCT_ActionPerformed

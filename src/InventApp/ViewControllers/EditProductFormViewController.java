@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -236,7 +236,7 @@ public class EditProductFormViewController extends javax.swing.JFrame {
 
         InventApp.Category category = new InventApp.Category();
 
-        HashMap<String, Integer> map = category.populateCombo();
+        TreeMap<String, Integer> map = category.populateCombo();
 
         for(String s : map.keySet()){
 
@@ -261,7 +261,7 @@ public class EditProductFormViewController extends javax.swing.JFrame {
         InventApp.Product product;
         InventApp.Category category = new InventApp.Category();
 
-        HashMap<String, Integer> map = category.populateCombo();
+        TreeMap<String, Integer> map = category.populateCombo();
 
         String name = jTextField_Name.getText();
         String price;

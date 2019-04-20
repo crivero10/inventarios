@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -82,10 +82,10 @@ public class Category {
     }
      
     
-    // populate a HashMap with categories name and id
-    public HashMap<String, Integer> populateCombo(){
+    // populate a TreeMap with categories name and id
+    public TreeMap<String, Integer> populateCombo(){
 
-      HashMap<String, Integer> map = new HashMap<>();
+      TreeMap<String, Integer> map = new TreeMap<>();
 
       connection = DB_INFO.getConnection();
 
@@ -102,7 +102,8 @@ public class Category {
            Category category;
 
            
-
+          
+          
            while(rs.next()){
 
                category = new Category(rs.getInt(1), rs.getString(2));

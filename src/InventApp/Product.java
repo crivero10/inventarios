@@ -226,7 +226,40 @@ public class Product {
      
      
      
-     
+     public ArrayList<Product> getAllProducts(){
+        
+        ArrayList<Product> product_list = new ArrayList<>();
+        connection = DB_INFO.getConnection();
+        ResultSet rs;
+        PreparedStatement ps;
+        
+               String query = "SELECT product.id, product.name,category_id, quantity, price, description FROM product";
+        
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+           
+            Product prd;
+            
+            while(rs.next()){
+                prd = new Product(rs.getInt("id"), 
+                                 rs.getString("name"), 
+                                 rs.getInt("category_id"),
+                                 rs.getString("price"),
+                                 rs.getInt("quantity"),
+                                 rs.getString("description"),
+                                 null
+                                 );
+                
+                product_list.add(prd);
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return product_list;
+        
+    }
      
      
     // get products by category
@@ -266,7 +299,18 @@ public class Product {
         
     }
     
-     
+    public boolean containsSignificantSubstr(String filter){
+        if(this.name.contains(filter)){
+            return true;
+        }
+        if(this.description.contains(filter)){
+            return true;
+        }
+        if(this.price.contains(filter)){
+            return true;
+        }
+        return false;
+    }
    
 
     public Integer getId() {

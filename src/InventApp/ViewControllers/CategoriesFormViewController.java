@@ -30,6 +30,8 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
     InventApp.Category category = new InventApp.Category();
     public CategoriesFormViewController() {
         initComponents();
+        jTextField_CATEGORY_ID.setVisible(false);
+        jLabel1.setVisible(false); 
         
         populateJtable();
         
@@ -42,9 +44,6 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
             
         
         
-        jTable_CATEGORIES_.setShowGrid(true);
-        
-        jTable_CATEGORIES_.setGridColor(Color.YELLOW);
         
         jTable_CATEGORIES_.setSelectionBackground(Color.gray);
         
@@ -76,22 +75,6 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
     
     
     // populate list with products in the selected category
-    public void populateProductsList(Integer categoryId){
-        
-        InventApp.Product prd = new InventApp.Product();
-
-        ArrayList<InventApp.Product> ProductList = prd.productsInCategoryList(categoryId);
-          DefaultListModel model = new DefaultListModel(); 
-        
-        for(int i = 0; i < ProductList.size(); i++){
-            
-          model.addElement(ProductList.get(i).getName());
-
-        }
-        jList_PRODUCTS_IN_CATEGORY.setModel(model);
-
-    }
-  
     
     
     /**
@@ -106,8 +89,6 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_CATEGORIES_ = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList_PRODUCTS_IN_CATEGORY = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jTextField_CATEGORY_ID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -115,13 +96,15 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
         jButton_INSERT_CATEGORY_ = new javax.swing.JButton();
         jButton_UPDATE_CATEGORY_ = new javax.swing.JButton();
         jButton_DELETE_CATEGORY_ = new javax.swing.JButton();
-        jButton_NEXT_ = new javax.swing.JButton();
-        jButton_PREVIOUS_ = new javax.swing.JButton();
         jButton_SHOW_PRODUCTS_IN_CATEGORY = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField_CATEGORY_NAME1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(149, 165, 166));
+        jPanel1.setBackground(new java.awt.Color(255, 166, 0));
+        jPanel1.setToolTipText("");
 
         jTable_CATEGORIES_.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,18 +121,21 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable_CATEGORIES_);
 
-        jScrollPane2.setViewportView(jList_PRODUCTS_IN_CATEGORY);
-
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Codigo SAT:");
 
         jTextField_CATEGORY_ID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField_CATEGORY_ID.setEnabled(false);
+        jTextField_CATEGORY_ID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_CATEGORY_IDActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Descripcion:");
+        jLabel4.setText("Codigo SAT");
 
         jTextField_CATEGORY_NAME.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -184,26 +170,6 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
             }
         });
 
-        jButton_NEXT_.setBackground(new java.awt.Color(34, 49, 63));
-        jButton_NEXT_.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton_NEXT_.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_NEXT_.setText("Siguiente");
-        jButton_NEXT_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_NEXT_ActionPerformed(evt);
-            }
-        });
-
-        jButton_PREVIOUS_.setBackground(new java.awt.Color(34, 49, 63));
-        jButton_PREVIOUS_.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton_PREVIOUS_.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_PREVIOUS_.setText("Previa");
-        jButton_PREVIOUS_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_PREVIOUS_ActionPerformed(evt);
-            }
-        });
-
         jButton_SHOW_PRODUCTS_IN_CATEGORY.setBackground(new java.awt.Color(142, 68, 173));
         jButton_SHOW_PRODUCTS_IN_CATEGORY.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton_SHOW_PRODUCTS_IN_CATEGORY.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,35 +181,53 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Descripcion del SAT:");
+
+        jTextField_CATEGORY_NAME1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel6.setText("AGREGAR UNA CATEGORIA SAT");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton_NEXT_, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton_PREVIOUS_, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_DELETE_CATEGORY_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton_UPDATE_CATEGORY_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(23, 23, 23))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_CATEGORY_ID, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                            .addComponent(jTextField_CATEGORY_NAME)))
-                    .addComponent(jButton_INSERT_CATEGORY_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_UPDATE_CATEGORY_, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                    .addComponent(jButton_DELETE_CATEGORY_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(36, 36, 36)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jTextField_CATEGORY_NAME1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextField_CATEGORY_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton_INSERT_CATEGORY_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(17, 17, 17))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jTextField_CATEGORY_NAME, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_SHOW_PRODUCTS_IN_CATEGORY, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                .addGap(26, 26, 26))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,38 +235,41 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_SHOW_PRODUCTS_IN_CATEGORY, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1)
                         .addGap(4, 4, 4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jTextField_CATEGORY_ID))
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField_CATEGORY_NAME))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_NEXT_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton_PREVIOUS_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton_INSERT_CATEGORY_, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_UPDATE_CATEGORY_, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_CATEGORY_NAME, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_DELETE_CATEGORY_, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40))
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_CATEGORY_NAME1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(jButton_INSERT_CATEGORY_)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_UPDATE_CATEGORY_)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_DELETE_CATEGORY_)
+                        .addGap(124, 124, 124)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_CATEGORY_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE)))
+                .addComponent(jButton_SHOW_PRODUCTS_IN_CATEGORY, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +306,7 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
 
             InventApp.MyTableModel mmd = new InventApp.MyTableModel(rows, colNames);
             productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.setModel(mmd);
-            productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.setRowHeight(80);
+            productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.setRowHeight(20);
             productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.getColumnModel().getColumn(5).setPreferredWidth(150);
             productsInCategoryForm.jTable_PRODUCTS_IN_CATEGORY.getColumnModel().getColumn(4).setPreferredWidth(120);
             productsInCategoryForm.jLabel_CATEGORY_NAME.setText(" Products In The Category :  " + jTable_CATEGORIES_.getValueAt(jTable_CATEGORIES_.getSelectedRow(),1).toString());
@@ -333,33 +320,6 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton_SHOW_PRODUCTS_IN_CATEGORYActionPerformed
-
-    // button previous
-    private void jButton_PREVIOUS_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PREVIOUS_ActionPerformed
-
-        if(position == 0)
-        {
-            return;
-        }
-
-        position --;
-        navigation(position);
-        jTable_CATEGORIES_MouseClicked(null);
-    }//GEN-LAST:event_jButton_PREVIOUS_ActionPerformed
-
-    // button next
-    private void jButton_NEXT_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NEXT_ActionPerformed
-
-        if(position == category.categoriesList().size() - 1)
-        {
-            return;
-        }
-
-        position ++;
-        navigation(position);
-        jTable_CATEGORIES_MouseClicked(null);
-        //System.out.println(position.toString());
-    }//GEN-LAST:event_jButton_NEXT_ActionPerformed
 
     // button remove the selected category
     private void jButton_DELETE_CATEGORY_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DELETE_CATEGORY_ActionPerformed
@@ -421,11 +381,14 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
         jTextField_CATEGORY_ID.setText(jTable_CATEGORIES_.getValueAt(rowIndex, 0).toString());
         jTextField_CATEGORY_NAME.setText(jTable_CATEGORIES_.getValueAt(rowIndex, 1).toString());
 
-        populateProductsList(Integer.valueOf(jTable_CATEGORIES_.getValueAt(rowIndex, 0).toString()));
 
         position = rowIndex;
 
     }//GEN-LAST:event_jTable_CATEGORIES_MouseClicked
+
+    private void jTextField_CATEGORY_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_CATEGORY_IDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_CATEGORY_IDActionPerformed
 
     
     
@@ -487,18 +450,17 @@ public class CategoriesFormViewController extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_DELETE_CATEGORY_;
     private javax.swing.JButton jButton_INSERT_CATEGORY_;
-    private javax.swing.JButton jButton_NEXT_;
-    private javax.swing.JButton jButton_PREVIOUS_;
     private javax.swing.JButton jButton_SHOW_PRODUCTS_IN_CATEGORY;
     private javax.swing.JButton jButton_UPDATE_CATEGORY_;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList_PRODUCTS_IN_CATEGORY;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable_CATEGORIES_;
     private javax.swing.JTextField jTextField_CATEGORY_ID;
     private javax.swing.JTextField jTextField_CATEGORY_NAME;
+    private javax.swing.JTextField jTextField_CATEGORY_NAME1;
     // End of variables declaration//GEN-END:variables
 }
