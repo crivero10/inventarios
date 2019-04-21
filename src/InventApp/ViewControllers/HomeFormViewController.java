@@ -2,6 +2,7 @@ package InventApp.ViewControllers;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import java.util.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,10 +24,19 @@ public class HomeFormViewController extends javax.swing.JFrame {
         initComponents();
 
         ImageIcon imgThisImg = new ImageIcon("src\\images\\my_store.png");
-
-        jLabel_BackgroundImage.setIcon(imgThisImg);
-
-      
+        reloadContainerComponents();
+        jLabel_MONEYNOW.setFont(jLabel_MONEYNOW.getFont().deriveFont (48.0f));
+        jLabel_FULLNAME.setFont(jLabel_FULLNAME.getFont().deriveFont (32.0f));
+    }
+    
+    private void reloadContainerComponents(){
+        String moneyString = "$"+String.valueOf(InventApp.Configuracion.config.getSesionActual().getCashInSession());
+        String cashierName = InventApp.Configuracion.config.getSesionActual().getCajeroEnSesion().getNombreCajero();
+        System.out.println(cashierName);
+        jLabel_FULLNAME.setText("Bienvenido, " + cashierName);
+        Date currentDate = new Date();
+        jLabel_DATETIME.setText("Hoy es "+currentDate.toString());
+        jLabel_MONEYNOW.setText(moneyString); 
         
     }
 
@@ -40,6 +50,14 @@ public class HomeFormViewController extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel_BackgroundImage = new javax.swing.JLabel();
+        jLabel_FULLNAME = new javax.swing.JLabel();
+        jLabel_MONEYNOW = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable_TODAYSALES = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel_DATETIME = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu_PRODUCT_ = new javax.swing.JMenu();
         jMenu_CATEGORY_ = new javax.swing.JMenu();
@@ -49,6 +67,36 @@ public class HomeFormViewController extends javax.swing.JFrame {
         jMenu_FACT = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel_FULLNAME.setText("Bienvenido, ");
+
+        jLabel_MONEYNOW.setText("jLabel2");
+
+        jLabel3.setText("Dinero en caja");
+
+        jLabel4.setText("Ventas del dia");
+
+        jTable_TODAYSALES.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable_TODAYSALES);
+
+        jButton1.setText("CORTE DE CAJA");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel_DATETIME.setText("jLabel1");
 
         jMenu_PRODUCT_.setBackground(new java.awt.Color(249, 105, 14));
         jMenu_PRODUCT_.setText("  INVENTARIO  |");
@@ -128,13 +176,48 @@ public class HomeFormViewController extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_BackgroundImage, javax.swing.GroupLayout.DEFAULT_SIZE, 1396, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_MONEYNOW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel_DATETIME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel_FULLNAME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_BackgroundImage, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel_BackgroundImage, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel_FULLNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_DATETIME)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_MONEYNOW, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,6 +290,10 @@ public class HomeFormViewController extends javax.swing.JFrame {
                 moduloPrefac.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jMenu_FACTMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,7 +331,13 @@ public class HomeFormViewController extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel jLabel_BackgroundImage;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel_BackgroundImage;
+    private javax.swing.JLabel jLabel_DATETIME;
+    private javax.swing.JLabel jLabel_FULLNAME;
+    private javax.swing.JLabel jLabel_MONEYNOW;
     public javax.swing.JMenu jMenu5_USER_;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenu_CATEGORY_;
@@ -252,5 +345,7 @@ public class HomeFormViewController extends javax.swing.JFrame {
     public javax.swing.JMenu jMenu_FACT;
     private javax.swing.JMenu jMenu_ORDER_;
     private javax.swing.JMenu jMenu_PRODUCT_;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable_TODAYSALES;
     // End of variables declaration//GEN-END:variables
 }

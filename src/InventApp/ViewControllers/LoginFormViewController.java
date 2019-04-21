@@ -6,6 +6,7 @@ import java.awt.font.TextAttribute;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -149,25 +150,23 @@ public class LoginFormViewController extends javax.swing.JFrame {
         ResultSet rs;
         
         try {
-            ps = InventApp.DB_INFO.getConnection().prepareStatement("SELECT `username`, `password` , `user_type` FROM `users` WHERE `username` = ? AND `password` = ?");
+            ps = InventApp.DB_INFO.getConnection().prepareStatement("SELECT `username`, `password` , `fullname`, `user_type` FROM `users` WHERE `username` = ? AND `password` = ?");
             ps.setString(1, jTextField_Username.getText());
             ps.setString(2, String.valueOf(jPasswordField_UserPass.getPassword()));
             
             rs = ps.executeQuery();
             
             if(rs.next()){
-                
+                Date fechaActual = new Date();
+                InventApp.Cajero cajeroEnSesion = new InventApp.Cajero(rs.getString("username"), rs.getString("fullname"));
+                InventApp.Sesion nuevaSesion = new InventApp.Sesion(fechaActual, null, 0.0, cajeroEnSesion);
+                InventApp.Configuracion.config.setSesionActual(nuevaSesion);
+                System.out.println(InventApp.Configuracion.config.getSesionActual().getCashInSession());
                 HomeFormViewController homeForm = new HomeFormViewController();
-                
-                if(rs.getString("user_type").equals("user"))
-                {
-                    homeForm.jMenu5_USER_.setVisible(false);
-                }
-                
                 homeForm.pack();
                 homeForm.setExtendedState(homeForm.getExtendedState() | JFrame.MAXIMIZED_BOTH);
                 Dimension r = homeForm.getBounds().getSize();
-                homeForm.jLabel_BackgroundImage.setPreferredSize(r);
+                
                 homeForm.setVisible(true);
                 
                 homeForm.setLocationRelativeTo(null);
